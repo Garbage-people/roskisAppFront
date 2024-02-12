@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/api/trashcans"
+const API_URL = "http://localhost:8080/api/trashcans"
 
 const getAll = () => (
     axios
