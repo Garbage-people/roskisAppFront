@@ -5,7 +5,9 @@ import TrashcanService from './services/TrashcanService'
 function App() {
 	const [trashcans, setTrashcans] = useState([])
 
-	useEffect(() => getAllTrashcans(), [])
+	useEffect(() => {
+		getAllTrashcans()
+	}, []);
 
 	const getAllTrashcans = () => {
 		TrashcanService
