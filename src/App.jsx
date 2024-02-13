@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import './App.css'
+// import './App.css'
 import TrashcanService from './services/TrashcanService'
+import OSMap from './components/OSMap'
 
 function App() {
 	const [trashcans, setTrashcans] = useState([])
@@ -17,6 +18,9 @@ function App() {
 
 	return (
 		<>
+			<div id="map">
+			<OSMap/>
+			</div>
 			<ul>
 				{trashcans.map(trashcan =>
 					<li key={trashcan.id}>{trashcan.lon} {trashcan.lat}</li>)}
