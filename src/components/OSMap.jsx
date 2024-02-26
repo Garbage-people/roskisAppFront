@@ -5,9 +5,9 @@ import { Icon } from "leaflet";
 export default function OSMap({ userLat, userLon, trashcans }) {
     const trashIcon = new Icon({
         iconUrl: 'https://cdn-icons-png.flaticon.com/512/1843/1843344.png',
-        iconSize: [32, 32],
+        iconSize: [16, 16],
         iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
+        popupAnchor: [-8, -32]
     });
 
     return (
