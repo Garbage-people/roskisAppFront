@@ -12,7 +12,7 @@ In addition to installing the application locally, it is necessary to run the co
 After running the necessary command and also installing the backend of this application, run npm run dev to start the application. The port which will be called is localhost:5173.
 
 ## The map
-This application utilizes a map provided by OpenStreetMap (using React.js). More information on the map can be found here: https://giuliacajati.medium.com/all-about-openstreetmap-using-react-js-c24fd0856aca.
+This application utilizes a map by OpenStreetMap. The OSM(OpenStreetMap) uses a JavaScript library called React Leaflet. More information on React Leaflet and OSM can be found here: https://react-leaflet.js.org/ and https://www.openstreetmap.org/about.
 
 ## Authors
 Jani
