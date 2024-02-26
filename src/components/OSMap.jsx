@@ -1,7 +1,7 @@
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import '../App.css';
 
-export default function OSMap({ userLat, userLon }) {
+export default function OSMap({ userLat, userLon, trashcans }) {
     return (
         <MapContainer center={[userLat, userLon]} zoom={20}>
             <TileLayer
@@ -9,16 +9,11 @@ export default function OSMap({ userLat, userLon }) {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            {
-                
-            }
-
-            <Marker position={[40.505, -100.09]}>
-                <Popup>
+            {trashcans.map(trashcan =>
+                <Marker position={[trashcan.lat, trashcan.lon]}> <Popup>
                     I am a pop-up!
-                </Popup>
-            </Marker>
-
+                </Popup></Marker>)
+            }
         </MapContainer>
     );
 }
