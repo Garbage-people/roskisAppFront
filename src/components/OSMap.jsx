@@ -1,14 +1,13 @@
-import { MapContainer, TileLayer, useMap } from "react-leaflet"
-import '../App.css'
+import { MapContainer, TileLayer } from "react-leaflet";
+import '../App.css';
 
-export default function OSMap() {
+export default function OSMap({ userLat, userLon }) {
     return (
-        <MapContainer center={[51.505, -0.09]} zoom={10}>
-
+        <MapContainer center={[userLat, userLon]} zoom={20}>
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
         </MapContainer>
-    )
+    );
 }
