@@ -11,7 +11,7 @@ export default function OSMap({ userLat, userLon, trashcans }) {
 
             {trashcans.map(trashcan =>
                 <Marker position={[trashcan.lat, trashcan.lon]}> <Popup>
-                    I am a pop-up!
+                    lat: {trashcan.lat}, lon: {trashcan.lon}
                 </Popup></Marker>)
             }
         </MapContainer>

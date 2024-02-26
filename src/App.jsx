@@ -48,13 +48,6 @@ function App() {
                     <OSMap trashcans={trashcans} userLat={userLat} userLon={userLon} />
                 }
             </div>
-
-			{/* list of the trashcan locations for early iteration, to be replaced with map markers */}
-            <ul>
-                {trashcans.map(trashcan =>
-                    <li key={trashcan.id}>{trashcan.lon} {trashcan.lat}</li>
-                )}
-            </ul>
         </>
     );
 }
