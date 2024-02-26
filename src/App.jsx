@@ -1,61 +1,62 @@
-import { useEffect, useState } from 'react'
-// import './App.css'
-import TrashcanService from './services/TrashcanService'
-import OSMap from './components/OSMap'
+// App.jsx
+import { useEffect, useState } from 'react';
+import TrashcanService from './services/TrashcanService';
+import OSMap from './components/OSMap';
 
 function App() {
-	const [userLat, setUserLat] = useState(null);
-	const [userLon, setUserLon] = useState(null);
+    const [userLat, setUserLat] = useState(null);
+    const [userLon, setUserLon] = useState(null);
 	const [trashcans, setTrashcans] = useState([]);
+	const defaultLat = 60.1711;
+	const defaultLon = 24.9414;
+	
 
-	useEffect(() => {
-		getAllTrashcans();
-	}, []);
+    const getAllTrashcans = () => {
+        TrashcanService.getAll()
+            .then(response => setTrashcans(response))
+            .catch(error => console.error('Error fetching trashcans:', error));
+    };
 
-	const getAllTrashcans = () => {
-		TrashcanService
-			.getAll()
-			.then(response => setTrashcans(response))
-	}
-
-	const getLocation = () => {
+    const getLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
-                function (position) {
+                position => {
                     setUserLat(position.coords.latitude);
                     setUserLon(position.coords.longitude);
                 },
-                function (error) {
+                error => {
                     console.error('Error getting location:', error);
+                    setUserLat(defaultLat);
+                    setUserLon(defaultLon);
                 }
             );
         } else {
-            console.error('Geolocation is not supported.');
+            setUserLat(defaultLat);
+            setUserLon(defaultLon);
         }
     };
 
-	return (
-		<>
-			<div id="map">
-			<OSMap trashcans={trashcans}/>
-			</div>
+    useEffect(() => {
+        getAllTrashcans();
+        getLocation();
+    }, []);
+
+    return (
+        <>
+            <div id="map">
+                {userLat !== null && userLon !== null &&
+                    <OSMap trashcans={trashcans} userLat={userLat} userLon={userLon} />
+                }
+            </div>
 
 			{/* list of the trashcan locations for early iteration, to be replaced with map markers */}
-			<ul>
-				{trashcans.map(trashcan =>
-					<li key={trashcan.id}>{trashcan.lon} {trashcan.lat}</li>)}
-			</ul>
-			<button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-                onClick={getLocation}
-            >
-                Get Location
-            </button>
-            <p>
-                User Location: {userLat !== null && userLon !== null ? `${userLat}, ${userLon}` : 'Not available'}
-            </p>
-		</>
-	)
+            <ul>
+                {trashcans.map(trashcan =>
+                    <li key={trashcan.id}>{trashcan.lon} {trashcan.lat}</li>
+                )}
+            </ul>
+        </>
+    );
 }
 
-export default App
+export default App;
