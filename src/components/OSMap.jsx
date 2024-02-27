@@ -11,7 +11,7 @@ export default function OSMap({ userLat, userLon, trashcans }) {
     });
 
     return (
-        <MapContainer center={[userLat, userLon]} zoom={17} minZoom={17} dragging={false}>
+        <MapContainer center={[userLat, userLon]} zoom={17} minZoom={17} dragging={true}>
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMapin tekijät</a> | © Aineistot: Helsingin kaupunki'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -20,8 +20,10 @@ export default function OSMap({ userLat, userLon, trashcans }) {
             {trashcans.map(trashcan =>
                 <Marker key={trashcan.id} position={[trashcan.lat, trashcan.lon]} icon={trashIcon}> <Popup>
                     lat: {trashcan.lat}, lon: {trashcan.lon}
-                </Popup></Marker>)
+                </Popup>
+                </Marker>)
             }
+            <Marker position={[userLat, userLon]}/>
         </MapContainer>
     );
 }
