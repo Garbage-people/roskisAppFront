@@ -13,7 +13,7 @@ export default function OSMap({ userLat, userLon, trashcans }) {
     return (
         <MapContainer center={[userLat, userLon]} zoom={20}>
             <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMapin tekijät</a> | © Aineistot: Helsingin kaupunki'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
