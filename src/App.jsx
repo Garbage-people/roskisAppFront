@@ -1,7 +1,8 @@
-// App.jsx
 import { useEffect, useState } from 'react';
 import TrashcanService from './services/TrashcanService';
 import OSMap from './components/OSMap';
+import "./App.css"
+import "./index.css"
 
 function App() {
     const [userLat, setUserLat] = useState(null);
@@ -36,6 +37,11 @@ function App() {
         }
     };
 
+    // this is a cheat way of refreshing user location would possibly like to modify it later to update OSMap "center"-property back to user location
+    const refreshLocation = () => {
+         window.location.reload()
+    }
+
     useEffect(() => {
         getAllTrashcans();
         getLocation();
@@ -44,6 +50,12 @@ function App() {
     return (
         <>
             <div id="map">
+                <button 
+                	className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" 
+                    id='refreshButton'
+                    onClick={refreshLocation}>
+                    refresh
+                    </button>
                 {userLat !== null && userLon !== null &&
                     <OSMap trashcans={trashcans} userLat={userLat} userLon={userLon} />
                 }
