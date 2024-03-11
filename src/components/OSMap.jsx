@@ -30,9 +30,9 @@ export default function OSMap({ userLat, userLon, trashcans }) {
                     <Popup>
                         lat: {trashcan.lat}, lon: {trashcan.lon}
                         <div style={{ display: "flex", justifyContent: "center", margin: "0", padding: "0" }}>
-                            <button id="empty" onClick={() => handleButtonClick(trashcan.id, 0)}><img src="src//resources//trashbinSlimFGreenGreyEmpty128.png" alt="Trashbin" width="40px" height="40px "></img></button>
-                            <button id="full" onClick={() => handleButtonClick(trashcan.id, 1)}><img src="src//resources//trashbinSlimMunsellPinkFull128.png" alt="Trashbin" width="40px" height="40px"></img></button>
-                            <button id="broken" onClick={() => handleButtonClick(trashcan.id, 2)}><img src="src//resources//trashbinSlimBlackGreyOOS128.png" alt="Trashbin" width="40px" height="40px"></img></button>
+                            <button onClick={() => handleButtonClick(trashcan.id, 0)}><img src="src//resources//trashbinSlimFGreenGreyEmpty128.png" alt="Trashbin" width="40px" height="40px "></img></button>
+                            <button onClick={() => handleButtonClick(trashcan.id, 1)}><img src="src//resources//trashbinSlimMunsellPinkFull128.png" alt="Trashbin" width="40px" height="40px"></img></button>
+                            <button onClick={() => handleButtonClick(trashcan.id, 2)}><img src="src//resources//trashbinSlimBlackGreyOOS128.png" alt="Trashbin" width="40px" height="40px"></img></button>
                         </div>
                     </Popup>
                 </Marker>)
