@@ -1,3 +1,5 @@
+![QRcode to GitHub Pages deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/QRcodeLink.png)
+
 # Lähiroskikset application
 This is the front end code of "Lähiroskikset"-application.
 
