@@ -1,8 +1,20 @@
+Deployed to: https://garbage-people.github.io/roskisAppFront/
+
+![QRcode to GitHub Pages deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/QRcodeLink.png)
+
 # Lähiroskikset application
 This is the front end code of "Lähiroskikset"-application.
 
 ## Description
 This application provides the user a map based on their location and shows the user icons of trashcans which can be found nearby. 
+
+When clicking on a trashcan icon, you will be given the possibility to change it by choosing between three different icons. Each icon is used to showcase a status. 
+
+The colours of the trashcans
+
+A green trashcan is used to show if a trashcan is available.
+A red trashcan shows if the trashcan is full.
+A grey trashcan is used when a trashcan is out of service.
 
 ## Technologies used on this project
 This application was was implemented by creating a React+Vite project. This part of the project receives the trashcans locations from the backend through REST-interface.
