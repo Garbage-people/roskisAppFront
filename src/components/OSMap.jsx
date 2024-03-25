@@ -1,7 +1,8 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "../App.css";
 import { Icon } from "leaflet";
 import { useState } from "react";
+import TrashcanService from "../services/TrashcanService";
+import "../App.css";
 
 export default function OSMap({ userLat, userLon, trashcans }) {
   const [trashCanState, setTrashCanState] = useState({});
@@ -19,9 +20,16 @@ export default function OSMap({ userLat, userLon, trashcans }) {
     iconAnchor: [16, 32],
   });
 
-  const handleButtonClick = (id, status) => {
+  const handleButtonClick = (id, status, lat, lon) => {
     const date = new Date().toISOString();
-    setTrashCanState({ id, status, date });
+    const updatedTrashCanState = {
+      id,
+      status: [status, date],
+      lat,
+      lon,
+    };
+    setTrashCanState(updatedTrashCanState);
+    TrashcanService.updateTrashcanStatus(updatedTrashCanState);
   };
 
   return (
@@ -52,7 +60,11 @@ export default function OSMap({ userLat, userLon, trashcans }) {
                 padding: "0",
               }}
             >
-              <button onClick={() => handleButtonClick(trashcan.id, 0)}>
+              <button
+                onClick={() =>
+                  handleButtonClick(trashcan.id, 0, trashcan.lat, trashcan.lon)
+                }
+              >
                 <img
                   src="images/trashbinSlimFGreenGreyEmpty128.png"
                   alt="Trashbin"
@@ -60,7 +72,11 @@ export default function OSMap({ userLat, userLon, trashcans }) {
                   height="40px "
                 ></img>
               </button>
-              <button onClick={() => handleButtonClick(trashcan.id, 1)}>
+              <button
+                onClick={() =>
+                  handleButtonClick(trashcan.id, 1, trashcan.lat, trashcan.lon)
+                }
+              >
                 <img
                   src="images/trashbinSlimMunsellPinkFull128.png"
                   alt="Trashbin"
@@ -68,7 +84,11 @@ export default function OSMap({ userLat, userLon, trashcans }) {
                   height="40px"
                 ></img>
               </button>
-              <button onClick={() => handleButtonClick(trashcan.id, 2)}>
+              <button
+                onClick={() =>
+                  handleButtonClick(trashcan.id, 2, trashcan.lat, trashcan.lon)
+                }
+              >
                 <img
                   src="images/trashbinSlimBlackGreyOOS128.png"
                   alt="Trashbin"
