@@ -1,3 +1,5 @@
+Deployed to: https://garbage-people.github.io/roskisAppFront/
+
 ![QRcode to GitHub Pages deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/QRcodeLink.png)
 
 # Lähiroskikset application
