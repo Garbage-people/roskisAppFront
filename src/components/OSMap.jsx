@@ -13,6 +13,12 @@ export default function OSMap({ userLat, userLon, trashcans }) {
     popupAnchor: [4, -32],
   });
 
+  const hereIcon = new Icon({
+    iconUrl: "images/HereMarker128HotPink.png",
+    iconSize: [40, 40],
+    iconAnchor: [16, 32],
+  });
+
   const handleButtonClick = (id, status) => {
     const date = new Date().toISOString();
     setTrashCanState({ id, status, date });
@@ -74,7 +80,7 @@ export default function OSMap({ userLat, userLon, trashcans }) {
           </Popup>
         </Marker>
       ))}
-      <Marker position={[userLat, userLon]} />
+      <Marker icon={hereIcon} position={[userLat, userLon]} />
     </MapContainer>
   );
 }
