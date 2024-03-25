@@ -11,7 +11,7 @@ COPY . .
 # Build the React app
 RUN npm run build
 
-FROM nginx:mainline-alpine
+FROM nginx:1.24-alpine
 # Support running as arbitrary user which belongs to the root group
 # Note that users are not allowed to listen on privileged ports (< 1024)
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx && \
