@@ -9,10 +9,13 @@ function App() {
   const defaultPosition = { lat: 60.1711, lon: 24.9414 };
   const [trashcans, setTrashcans] = useState([]);
 
-  const getAllTrashcans = () => {
-    TrashcanService.getAll()
-      .then((response) => setTrashcans(response))
-      .catch((error) => console.error("Error fetching trashcans:", error));
+  const getAllTrashcans = async () => {
+    try {
+      const res = await TrashcanService.getAll();
+      setTrashcans(res);
+    } catch (err) {
+      console.error("Error fetching trashcans", err);
+    }
   };
 
   const getLocation = () => {
