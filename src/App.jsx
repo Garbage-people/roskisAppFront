@@ -15,7 +15,7 @@ function App() {
       setTrashcans(res);
     } catch (err) {
       console.error("Error fetching trashcans", err);
-    }
+    };
   };
 
   const getLocation = () => {
