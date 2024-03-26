@@ -9,11 +9,15 @@ const getAll = async () => {
         return res.data;
     } catch(err) {
         console.error("Error fetching trashcan data", err);
-    }
+    };
 };
 
 const updateTrashcanStatus = async (trashCanState) => {
-    await axios.put(`${API_URL}/${trashCanState.id}`, trashCanState);
+    try {
+        await axios.put(`${API_URL}/${trashCanState.id}`, trashCanState);
+    } catch(err) {
+        console.error("Error updating trashcan status", err);
+    };
 };
 
 export default { getAll, updateTrashcanStatus };
