@@ -4,7 +4,7 @@ import { useState } from "react";
 import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 
-export default function OSMap({ userLat, userLon, trashcans }) {
+export default function OSMap({ userPosition, trashcans }) {
   const [trashCanState, setTrashCanState] = useState({});
 
   const trashIcon = new Icon({
@@ -34,7 +34,7 @@ export default function OSMap({ userLat, userLon, trashcans }) {
 
   return (
     <MapContainer
-      center={[userLat, userLon]}
+      center={[userPosition.lat, userPosition.lon]}
       zoom={17}
       minZoom={17}
       dragging={true}
@@ -100,7 +100,7 @@ export default function OSMap({ userLat, userLon, trashcans }) {
           </Popup>
         </Marker>
       ))}
-      <Marker icon={hereIcon} position={[userLat, userLon]} />
+      <Marker icon={hereIcon} position={[userPosition.lat, userPosition.lon]} />
     </MapContainer>
   );
 }
