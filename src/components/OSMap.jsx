@@ -20,7 +20,7 @@ export default function OSMap({ userPosition, trashcans }) {
     iconAnchor: [16, 32],
   });
 
-  const handleButtonClick = (id, status, lat, lon) => {
+  const updateTrashcanState = (id, status, lat, lon) => {
     const date = new Date().toISOString();
     const updatedTrashCanState = {
       id,
@@ -62,7 +62,12 @@ export default function OSMap({ userPosition, trashcans }) {
             >
               <button
                 onClick={() =>
-                  handleButtonClick(trashcan.id, 0, trashcan.lat, trashcan.lon)
+                  updateTrashcanState(
+                    trashcan.id,
+                    0,
+                    trashcan.lat,
+                    trashcan.lon
+                  )
                 }
               >
                 <img
@@ -74,7 +79,12 @@ export default function OSMap({ userPosition, trashcans }) {
               </button>
               <button
                 onClick={() =>
-                  handleButtonClick(trashcan.id, 1, trashcan.lat, trashcan.lon)
+                  updateTrashcanState(
+                    trashcan.id,
+                    1,
+                    trashcan.lat,
+                    trashcan.lon
+                  )
                 }
               >
                 <img
@@ -86,7 +96,12 @@ export default function OSMap({ userPosition, trashcans }) {
               </button>
               <button
                 onClick={() =>
-                  handleButtonClick(trashcan.id, 2, trashcan.lat, trashcan.lon)
+                  updateTrashcanState(
+                    trashcan.id,
+                    2,
+                    trashcan.lat,
+                    trashcan.lon
+                  )
                 }
               >
                 <img
