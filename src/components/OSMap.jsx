@@ -5,9 +5,21 @@ import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 
 export default function OSMap({ userPosition, trashcans }) {
-  const [trashCanState, setTrashCanState] = useState({});
+  const emptyIcon = new Icon({
+    iconUrl: "images/trashbinSlimFGreenGreyEmpty128.png",
+    iconSize: [40, 40],
+    iconAnchor: [16, 32],
+    popupAnchor: [4, -32],
+  });
 
-  const trashIcon = new Icon({
+  const fullIcon = new Icon({
+    iconUrl: "images/trashbinSlimFGreenGreyEmpty128.png",
+    iconSize: [40, 40],
+    iconAnchor: [16, 32],
+    popupAnchor: [4, -32],
+  });
+
+  const brokenIcon = new Icon({
     iconUrl: "images/trashbinSlimFGreenGreyEmpty128.png",
     iconSize: [40, 40],
     iconAnchor: [16, 32],
@@ -20,7 +32,7 @@ export default function OSMap({ userPosition, trashcans }) {
     iconAnchor: [16, 32],
   });
 
-  const updateTrashcanState = (id, status, lat, lon) => {
+  const updateTrashcanState = async (id, status, lat, lon) => {
     const date = new Date().toISOString();
     const updatedTrashCanState = {
       id,
@@ -28,8 +40,14 @@ export default function OSMap({ userPosition, trashcans }) {
       lat,
       lon,
     };
-    setTrashCanState(updatedTrashCanState);
-    TrashcanService.updateTrashcanStatus(updatedTrashCanState);
+    try {
+      const newStatus = await TrashcanService.updateTrashcanStatus(
+        updatedTrashCanState
+      );
+      console.log("Updated status:", newStatus);
+    } catch (err) {
+      console.err(err);
+    }
   };
 
   return (
@@ -48,7 +66,7 @@ export default function OSMap({ userPosition, trashcans }) {
         <Marker
           key={trashcan.id}
           position={[trashcan.lat, trashcan.lon]}
-          icon={trashIcon}
+          icon={emptyIcon}
         >
           <Popup>
             lat: {trashcan.lat}, lon: {trashcan.lon}

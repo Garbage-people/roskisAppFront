@@ -14,9 +14,17 @@ const getAll = async () => {
 
 const updateTrashcanStatus = async (trashCanState) => {
     try {
-        await axios.put(`${API_URL}/${trashCanState.id}`, trashCanState);
+       const res = await axios.put(`${API_URL}/${trashCanState.id}`, trashCanState);
+       const parsedData = JSON.parse(res.config.data);
+       const status = parsedData.status[0];
+       const dateTime = parsedData.status[1];
+       console.log(status);
+       console.log(dateTime);
+
+       return status;
     } catch(err) {
         console.error("Error updating trashcan status", err);
+        return null;
     };
 };
 
