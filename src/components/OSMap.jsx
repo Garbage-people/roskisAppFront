@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 
@@ -41,6 +41,12 @@ export default function OSMap({ userPosition, trashcans }) {
       : trashcanIcons.at(Number(status.at(0)))
   );
 
+  const getLastUpdatedDate = (status) => (
+    status.at(1) === ""
+      ? "never"
+      : new Date(Date.parse(status.at(1))).toLocaleString("fi-FI")
+  )
+
   const updateTrashcanState = async (id, status, lat, lon) => {
     const date = new Date().toISOString();
     const updatedTrashCanState = {
@@ -77,7 +83,8 @@ export default function OSMap({ userPosition, trashcans }) {
           icon={getTrashcanIcon(trashcan.status)}
         >
           <Popup>
-            lat: {trashcan.lat}, lon: {trashcan.lon}
+            lat: {trashcan.lat}, lon: {trashcan.lon},
+            viimeisin päivitys: {getLastUpdatedDate(trashcan.status)}
             <div
               style={{
                 display: "flex",
