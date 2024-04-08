@@ -1,26 +1,47 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 
 export default function OSMap({ userPosition, trashcans }) {
-  const [trashCanState, setTrashCanState] = useState({});
 
-  const trashIcon = new Icon({
-    iconUrl: "images/RoskisVihreä.png",
-    iconSize: [60, 60],
+  const emptyIcon = new Icon({
+    iconUrl: "images/trashbinSlimFGreenGreyEmpty128.png",
+    iconSize: [40, 40],
+    iconAnchor: [16, 32],
+    popupAnchor: [4, -32],
+  });
+
+  const fullIcon = new Icon({
+    iconUrl: "images/trashbinSlimMunsellPinkFull128.png",
+    iconSize: [40, 40],
+    iconAnchor: [16, 32],
+    popupAnchor: [4, -32],
+  });
+
+  const brokenIcon = new Icon({
+    iconUrl: "images/trashbinSlimBlackGreyOOS128.png",
+    iconSize: [40, 40],
     iconAnchor: [16, 32],
     popupAnchor: [4, -32],
   });
 
   const hereIcon = new Icon({
     iconUrl: "images/HereMarker128HotPink.png",
-    iconSize: [40, 40],
+    iconSize: [70, 70],
     iconAnchor: [16, 32],
   });
 
-  const updateTrashcanState = (id, status, lat, lon) => {
+  const trashcanIcons = [emptyIcon, fullIcon, brokenIcon]
+
+  const getTrashcanIcon = (status) => (
+    status.at(0) === ""
+      ? emptyIcon
+      : trashcanIcons.at(Number(status.at(0)))
+  );
+
+  const updateTrashcanState = async (id, status, lat, lon) => {
     const date = new Date().toISOString();
     const updatedTrashCanState = {
       id,
@@ -28,8 +49,13 @@ export default function OSMap({ userPosition, trashcans }) {
       lat,
       lon,
     };
-    setTrashCanState(updatedTrashCanState);
-    TrashcanService.updateTrashcanStatus(updatedTrashCanState);
+    try {
+      await TrashcanService.updateTrashcanStatus(
+        updatedTrashCanState
+      );
+    } catch (err) {
+      console.err(err);
+    }
   };
 
   return (
@@ -48,7 +74,7 @@ export default function OSMap({ userPosition, trashcans }) {
         <Marker
           key={trashcan.id}
           position={[trashcan.lat, trashcan.lon]}
-          icon={trashIcon}
+          icon={getTrashcanIcon(trashcan.status)}
         >
           <Popup>
             lat: {trashcan.lat}, lon: {trashcan.lon}
