@@ -1,10 +1,11 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 
 export default function OSMap({ userPosition, trashcans }) {
+
   const emptyIcon = new Icon({
     iconUrl: "images/trashbinSlimFGreenGreyEmpty128.png",
     iconSize: [40, 40],
@@ -13,14 +14,14 @@ export default function OSMap({ userPosition, trashcans }) {
   });
 
   const fullIcon = new Icon({
-    iconUrl: "images/trashbinSlimFGreenGreyEmpty128.png",
+    iconUrl: "images/trashbinSlimMunsellPinkFull128.png",
     iconSize: [40, 40],
     iconAnchor: [16, 32],
     popupAnchor: [4, -32],
   });
 
   const brokenIcon = new Icon({
-    iconUrl: "images/trashbinSlimFGreenGreyEmpty128.png",
+    iconUrl: "images/trashbinSlimBlackGreyOOS128.png",
     iconSize: [40, 40],
     iconAnchor: [16, 32],
     popupAnchor: [4, -32],
@@ -32,6 +33,14 @@ export default function OSMap({ userPosition, trashcans }) {
     iconAnchor: [16, 32],
   });
 
+  const trashcanIcons = [emptyIcon, fullIcon, brokenIcon]
+
+  const getTrashcanIcon = (status) => (
+    status.at(0) === ""
+      ? emptyIcon
+      : trashcanIcons.at(Number(status.at(0)))
+  );
+
   const updateTrashcanState = async (id, status, lat, lon) => {
     const date = new Date().toISOString();
     const updatedTrashCanState = {
@@ -41,10 +50,9 @@ export default function OSMap({ userPosition, trashcans }) {
       lon,
     };
     try {
-      const newStatus = await TrashcanService.updateTrashcanStatus(
+      await TrashcanService.updateTrashcanStatus(
         updatedTrashCanState
       );
-      console.log("Updated status:", newStatus);
     } catch (err) {
       console.err(err);
     }
@@ -66,7 +74,7 @@ export default function OSMap({ userPosition, trashcans }) {
         <Marker
           key={trashcan.id}
           position={[trashcan.lat, trashcan.lon]}
-          icon={emptyIcon}
+          icon={getTrashcanIcon(trashcan.status)}
         >
           <Popup>
             lat: {trashcan.lat}, lon: {trashcan.lon}
