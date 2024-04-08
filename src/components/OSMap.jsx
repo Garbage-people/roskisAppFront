@@ -7,22 +7,22 @@ import "../App.css";
 export default function OSMap({ userPosition, trashcans }) {
 
   const emptyIcon = new Icon({
-    iconUrl: "images/trashbinSlimFGreenGreyEmpty128.png",
-    iconSize: [40, 40],
+    iconUrl: "images/RoskisVihreä.png",
+    iconSize: [70, 70],
     iconAnchor: [16, 32],
     popupAnchor: [4, -32],
   });
 
   const fullIcon = new Icon({
-    iconUrl: "images/trashbinSlimMunsellPinkFull128.png",
-    iconSize: [40, 40],
+    iconUrl: "images/RoskisPunainen.png",
+    iconSize: [70, 70],
     iconAnchor: [16, 32],
     popupAnchor: [4, -32],
   });
 
   const brokenIcon = new Icon({
-    iconUrl: "images/trashbinSlimBlackGreyOOS128.png",
-    iconSize: [40, 40],
+    iconUrl: "images/RoskisRuksi.png",
+    iconSize: [70, 70],
     iconAnchor: [16, 32],
     popupAnchor: [4, -32],
   });

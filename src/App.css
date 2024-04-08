@@ -27,14 +27,17 @@ html, body {
   bottom: 20px;
   left: calc(50% - 90px);
   z-index: 400;
+  border-radius: 10%;
+  background-color: hotpink;
+  font-size: large;
 }
 
 #addButton {
   position: absolute;
   bottom: 20px;
-  left: calc(50%);
+  left: calc(40%);
   z-index: 400;
-  border-radius: 10%;
+  border-radius: 25%;
   background-color: hotpink;
   font-size: large;
 }
@@ -68,7 +71,7 @@ html, body {
 #openModal {
   position: absolute;
   bottom: 20px;
-  left: 57%;
+  left: calc(55%);
   transform: translateX(-50%);
   z-index: 400;
   border-radius: 25%;
