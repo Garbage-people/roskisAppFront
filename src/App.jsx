@@ -15,7 +15,7 @@ function App() {
       setTrashcans(res);
     } catch (err) {
       console.error("Error fetching trashcans", err);
-    };
+    }
   };
 
   const getLocation = () => {
@@ -42,6 +42,18 @@ function App() {
     window.location.reload();
   };
 
+  const addTrashcan = async () => {
+    try {
+      const newTrashcan = {
+        lat: userPosition.lat,
+        lon: userPosition.lon,
+      };
+      await TrashcanService.addTrashcan(newTrashcan);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     getAllTrashcans();
     getLocation();
@@ -56,6 +68,13 @@ function App() {
           onClick={refreshLocation}
         >
           refresh
+        </button>
+        <button
+          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+          id="addButton"
+          onClick={addTrashcan}
+        >
+          +
         </button>
         {userPosition.lat !== null && userPosition.lon !== null && (
           <OSMap trashcans={trashcans} userPosition={userPosition} />
