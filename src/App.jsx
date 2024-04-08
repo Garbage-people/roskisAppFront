@@ -59,15 +59,70 @@ function App() {
     getLocation();
   }, []);
 
+  const modal = document.querySelector("#modal");
+  const openModal = document.querySelector("#openModal");
+  const closeModal = document.querySelector("#closeModal");
+
+  if (modal) {
+    openModal && openModal.addEventListener("click", () => modal.showModal());
+
+    closeModal && closeModal.addEventListener("click", () => modal.close());
+  }
+
   return (
     <>
       <div id="map">
         <button
           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+          id="openModal"
+        >
+          INFFO
+        </button>
+
+        <dialog id="modal" class="dialog">
+          <button id="closeModal" class="dialog-close-btn">
+            X
+          </button>
+          <img
+            src="images/RoskisVihreä.png"
+            alt="Trashbin"
+            width="100px"
+            height="100px "
+          ></img>
+          <p>Tämä kuvake tarkoittaa tyhjää/melkotyhjää roskista</p>
+
+          <img
+            src="images/RoskisKeltainen.png"
+            alt="Trashbin"
+            width="100px"
+            height="100px "
+          ></img>
+          <p>Tämä kuvale tarkoittaa täyttä/melkotäyttä roskista</p>
+
+          <img
+            src="images/RoskisPunainen.png"
+            alt="Trashbin"
+            width="100px"
+            height="100px "
+          ></img>
+          <p>Tämä kuvake tarkoittaa Täyttä/Käyttökelvotonta roskista</p>
+
+          <img
+            src="images/RoskisRuksi.png"
+            alt="Trashbin"
+            width="100px"
+            height="100px "
+          ></img>
+          <p>Tämä kuva tarkoittaa rikkinäistä roskista</p>
+
+        </dialog>
+
+        <button
+          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           id="refreshButton"
           onClick={refreshLocation}
         >
-          refresh
+          REFRESH
         </button>
         <button
           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"

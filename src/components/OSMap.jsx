@@ -7,29 +7,29 @@ import "../App.css";
 export default function OSMap({ userPosition, trashcans }) {
 
   const emptyIcon = new Icon({
-    iconUrl: "images/trashbinSlimFGreenGreyEmpty128.png",
-    iconSize: [40, 40],
+    iconUrl: "images/RoskisVihreä.png",
+    iconSize: [70, 70],
     iconAnchor: [16, 32],
     popupAnchor: [4, -32],
   });
 
   const fullIcon = new Icon({
-    iconUrl: "images/trashbinSlimMunsellPinkFull128.png",
-    iconSize: [40, 40],
+    iconUrl: "images/RoskisPunainen.png",
+    iconSize: [70, 70],
     iconAnchor: [16, 32],
     popupAnchor: [4, -32],
   });
 
   const brokenIcon = new Icon({
-    iconUrl: "images/trashbinSlimBlackGreyOOS128.png",
-    iconSize: [40, 40],
+    iconUrl: "images/RoskisRuksi.png",
+    iconSize: [70, 70],
     iconAnchor: [16, 32],
     popupAnchor: [4, -32],
   });
 
   const hereIcon = new Icon({
     iconUrl: "images/HereMarker128HotPink.png",
-    iconSize: [40, 40],
+    iconSize: [70, 70],
     iconAnchor: [16, 32],
   });
 
@@ -104,10 +104,10 @@ export default function OSMap({ userPosition, trashcans }) {
                 }
               >
                 <img
-                  src="images/trashbinSlimFGreenGreyEmpty128.png"
+                  src="images/RoskisVihreä.png"
                   alt="Trashbin"
-                  width="40px"
-                  height="40px "
+                  width="100px"
+                  height="100px "
                 ></img>
               </button>
               <button
@@ -121,10 +121,10 @@ export default function OSMap({ userPosition, trashcans }) {
                 }
               >
                 <img
-                  src="images/trashbinSlimMunsellPinkFull128.png"
+                  src="images/RoskisKeltainen.png"
                   alt="Trashbin"
-                  width="40px"
-                  height="40px"
+                  width="100px"
+                  height="100px"
                 ></img>
               </button>
               <button
@@ -138,10 +138,10 @@ export default function OSMap({ userPosition, trashcans }) {
                 }
               >
                 <img
-                  src="images/trashbinSlimBlackGreyOOS128.png"
+                  src="images/RoskisPunainen.png"
                   alt="Trashbin"
-                  width="40px"
-                  height="40px"
+                  width="100px"
+                  height="100px"
                 ></img>
               </button>
             </div>
