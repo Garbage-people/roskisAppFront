@@ -8,6 +8,7 @@ function App() {
   const [userPosition, setUserPosition] = useState({ lat: null, lon: null });
   const defaultPosition = { lat: 60.1711, lon: 24.9414 };
   const [trashcans, setTrashcans] = useState([]);
+  const [isLocationEnabled, setLocationEnabled] = useState(false);
 
   const getAllTrashcans = async () => {
     try {
@@ -26,14 +27,17 @@ function App() {
             lat: position.coords.latitude,
             lon: position.coords.longitude,
           });
+          setLocationEnabled(true);
         },
         (error) => {
           console.error("Error getting location:", error);
           setUserPosition(defaultPosition);
+          setLocationEnabled(false);
         }
       );
     } else {
       setUserPosition(defaultPosition);
+      setLocationEnabled(false);
     }
   };
 
@@ -44,11 +48,13 @@ function App() {
 
   const addTrashcan = async () => {
     try {
-      const newTrashcan = {
-        lat: userPosition.lat,
-        lon: userPosition.lon,
-      };
-      await TrashcanService.addTrashcan(newTrashcan);
+      if (isLocationEnabled) {
+        const newTrashcan = {
+          lat: userPosition.lat,
+          lon: userPosition.lon,
+        };
+        await TrashcanService.addTrashcan(newTrashcan);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -73,6 +79,7 @@ function App() {
           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           id="addButton"
           onClick={addTrashcan}
+          disabled={!isLocationEnabled}
         >
           +
         </button>

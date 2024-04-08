@@ -70,6 +70,8 @@ export default function OSMap({ userPosition, trashcans }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
+      <Marker zIndexOffset={true} icon={hereIcon} position={[userPosition.lat, userPosition.lon]} />
+
       {trashcans.map((trashcan) => (
         <Marker
           key={trashcan.id}
@@ -141,7 +143,6 @@ export default function OSMap({ userPosition, trashcans }) {
           </Popup>
         </Marker>
       ))}
-      <Marker icon={hereIcon} position={[userPosition.lat, userPosition.lon]} />
     </MapContainer>
   );
 }
