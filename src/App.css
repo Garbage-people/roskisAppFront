@@ -28,4 +28,50 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 400;
+  border-radius: 10%;
+  background-color: hotpink;
+  font-size: large;
+}
+
+
+.dialog {
+  max-width: 40rem;
+  padding: 2rem;
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+  position: relative;
+}
+
+.dialog::backdrop {
+  background: hsl(0 0% 0% / 50%);
+}
+
+.dialog-close-btn {
+  font-size: .75em;
+  position: absolute;
+  top: .25em;
+  right: .25em;
+}
+
+#modalText {
+  padding-top: 15px;
+  padding-right: 15px;
+}
+
+#openModal {
+  position: absolute;
+  bottom: 20px;
+  left: 57%;
+  transform: translateX(-50%);
+  z-index: 400;
+  border-radius: 25%;
+  background-color: hotpink;
+  font-size: large;
+}
+
+#closeModal {
+  font-size: xx-large;
+  padding-top: 5px;
+  padding-right: 10px;
 }
