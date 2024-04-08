@@ -79,8 +79,8 @@ function App() {
           INFFO
         </button>
 
-        <dialog id="modal" class="dialog">
-          <button id="closeModal" class="dialog-close-btn">
+        <dialog id="modal" className="dialog">
+          <button id="closeModal" className="dialog-close-btn">
             X
           </button>
           <img
