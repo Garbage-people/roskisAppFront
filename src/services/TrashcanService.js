@@ -28,4 +28,13 @@ const updateTrashcanStatus = async (trashCanState) => {
     };
 };
 
-export default { getAll, updateTrashcanStatus };
+const addTrashcan = async (newTrashcan) => {
+    try {
+        const res = await axios.post(`${API_URL}`, newTrashcan);
+        console.log(res.data)
+    } catch(err) {
+        console.error("Error adding a trashcan", err)
+    }
+}
+
+export default { getAll, updateTrashcanStatus, addTrashcan };
