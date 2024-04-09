@@ -139,7 +139,7 @@ function App() {
           +
         </button>
         {userPosition.lat !== null && userPosition.lon !== null && (
-          <OSMap trashcans={trashcans} userPosition={userPosition} />
+          <OSMap trashcans={trashcans} userPosition={userPosition} setTrashcans={setTrashcans} />
         )}
       </div>
     </>

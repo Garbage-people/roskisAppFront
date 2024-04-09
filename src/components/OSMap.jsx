@@ -4,27 +4,26 @@ import { Icon } from "leaflet";
 import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 
-export default function OSMap({ userPosition, trashcans }) {
-
+export default function OSMap({ userPosition, trashcans, setTrashcans }) {
   const emptyIcon = new Icon({
     iconUrl: "images/RoskisVihreä.png",
     iconSize: [70, 70],
     iconAnchor: [16, 32],
-    popupAnchor: [4, -32],
+    popupAnchor: [19, -16],
   });
 
   const fullIcon = new Icon({
     iconUrl: "images/RoskisPunainen.png",
     iconSize: [70, 70],
     iconAnchor: [16, 32],
-    popupAnchor: [4, -32],
+    popupAnchor: [19, -16],
   });
 
   const brokenIcon = new Icon({
     iconUrl: "images/RoskisRuksi.png",
     iconSize: [70, 70],
     iconAnchor: [16, 32],
-    popupAnchor: [4, -32],
+    popupAnchor: [19, -16],
   });
 
   const hereIcon = new Icon({
@@ -33,19 +32,15 @@ export default function OSMap({ userPosition, trashcans }) {
     iconAnchor: [16, 32],
   });
 
-  const trashcanIcons = [emptyIcon, fullIcon, brokenIcon]
+  const trashcanIcons = [emptyIcon, fullIcon, brokenIcon];
 
-  const getTrashcanIcon = (status) => (
-    status.at(0) === ""
-      ? emptyIcon
-      : trashcanIcons.at(Number(status.at(0)))
-  );
+  const getTrashcanIcon = (status) =>
+    status.at(0) === "" ? emptyIcon : trashcanIcons.at(Number(status.at(0)));
 
-  const getLastUpdatedDate = (status) => (
+  const getLastUpdatedDate = (status) =>
     status.at(1) === ""
       ? "never"
-      : new Date(Date.parse(status.at(1))).toLocaleString("fi-FI")
-  )
+      : new Date(Date.parse(status.at(1))).toLocaleString("fi-FI");
 
   const updateTrashcanState = async (id, status, lat, lon) => {
     const date = new Date().toISOString();
@@ -56,9 +51,11 @@ export default function OSMap({ userPosition, trashcans }) {
       lon,
     };
     try {
-      await TrashcanService.updateTrashcanStatus(
-        updatedTrashCanState
-      );
+      await TrashcanService.updateTrashcanStatus(updatedTrashCanState);
+
+      // after updating trashcan status, fetch updated trashcans and set them to trashcans state
+      const updatedTrashcans = await TrashcanService.getAll();
+      setTrashcans(updatedTrashcans);
     } catch (err) {
       console.err(err);
     }
@@ -76,7 +73,11 @@ export default function OSMap({ userPosition, trashcans }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      <Marker zIndexOffset={true} icon={hereIcon} position={[userPosition.lat, userPosition.lon]} />
+      <Marker
+        zIndexOffset={true}
+        icon={hereIcon}
+        position={[userPosition.lat, userPosition.lon]}
+      />
 
       {trashcans.map((trashcan) => (
         <Marker
@@ -85,8 +86,8 @@ export default function OSMap({ userPosition, trashcans }) {
           icon={getTrashcanIcon(trashcan.status)}
         >
           <Popup>
-            lat: {trashcan.lat}, lon: {trashcan.lon},
-            viimeisin päivitys: {getLastUpdatedDate(trashcan.status)}
+            lat: {trashcan.lat}, lon: {trashcan.lon}, viimeisin päivitys:{" "}
+            {getLastUpdatedDate(trashcan.status)}
             <div
               style={{
                 display: "flex",
