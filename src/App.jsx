@@ -95,15 +95,7 @@ function App() {
             width="100px"
             height="100px "
           ></img>
-          <p>Tämä kuvake tarkoittaa tyhjää/melkotyhjää roskista</p>
-
-          <img
-            src="images/RoskisKeltainen.png"
-            alt="Trashbin"
-            width="100px"
-            height="100px "
-          ></img>
-          <p>Tämä kuvale tarkoittaa täyttä/melkotäyttä roskista</p>
+          <p>Tämä kuvake tarkoittaa roskiksen olevan käytössä</p>
 
           <img
             src="images/RoskisPunainen.png"
@@ -111,7 +103,7 @@ function App() {
             width="100px"
             height="100px "
           ></img>
-          <p>Tämä kuvake tarkoittaa Täyttä/Käyttökelvotonta roskista</p>
+          <p>Tämä kuvake tarkoittaa roskiksen olevan täynnä</p>
 
           <img
             src="images/RoskisRuksi.png"

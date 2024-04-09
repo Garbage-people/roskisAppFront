@@ -124,7 +124,7 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
                 }
               >
                 <img
-                  src="images/RoskisKeltainen.png"
+                  src="images/RoskisPunainen.png"
                   alt="Trashbin"
                   width="100px"
                   height="100px"
@@ -141,7 +141,7 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
                 }
               >
                 <img
-                  src="images/RoskisPunainen.png"
+                  src="images/RoskisRuksi.png"
                   alt="Trashbin"
                   width="100px"
                   height="100px"
