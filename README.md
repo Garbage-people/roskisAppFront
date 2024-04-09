@@ -1,6 +1,6 @@
 Deployed to: https://roskisappfront-frontend-garbagepeople.rahtiapp.fi/
 
-![QRcode to CSC Rahti deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/frontend_qr_rahti.png)
+![QRcode to CSC Rahti deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/frontend_qrkoodi_rahti.png)
 
 # Lähiroskikset application
 This is the front end code of "Lähiroskikset"-application.
@@ -8,7 +8,7 @@ This is the front end code of "Lähiroskikset"-application.
 ## Description
 This application provides the user a map based on their location and shows the user icons of trashcans which can be found nearby. 
 
-##The colours of the trashcans
+## The colours of the trashcans
 
 A green trashcan is used to showcase if a trashcan is available.
 
@@ -16,7 +16,7 @@ A red trashcan shows if the trashcan is full.
 
 A grey trashcan with black cross over it, is used when a trashcan is out of service.
 
-##Functionalities in the app
+## Functionalities in the app
 
 The idea in the app is that users can update the trashcans statuses. 
 
