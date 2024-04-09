@@ -34,6 +34,7 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
   const trashcanIcons = [emptyIcon, fullIcon, brokenIcon];
 
   const getTrashcanIcon = (status) =>
+  // Here be dragons, as in date comparison should be implemented here
     status.at(0) === "" ? emptyIcon : trashcanIcons.at(Number(status.at(0)));
 
   const getLastUpdatedDate = (status) =>
