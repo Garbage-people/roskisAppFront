@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TrashcanService from "./services/TrashcanService";
 import OSMap from "./components/OSMap";
+import ConfirmDialog from "./components/ConfirmDialog";
 import "./App.css";
 import "./index.css";
 
@@ -9,6 +10,7 @@ function App() {
   const defaultPosition = { lat: 60.1711, lon: 24.9414 };
   const [trashcans, setTrashcans] = useState([]);
   const [isLocationEnabled, setLocationEnabled] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   const getAllTrashcans = async () => {
     try {
@@ -67,6 +69,19 @@ function App() {
     getLocation();
   }, []);
 
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+
+  const handleConfirmDialog = () => {
+    addTrashcan();
+    setDialogOpen(false);
+  };
+
   const modal = document.querySelector("#modal");
   const openModal = document.querySelector("#openModal");
   const closeModal = document.querySelector("#closeModal");
@@ -113,7 +128,6 @@ function App() {
             height="100px "
           ></img>
           <p>Tämä kuva tarkoittaa rikkinäistä roskista</p>
-
         </dialog>
 
         <button
@@ -126,13 +140,24 @@ function App() {
         <button
           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           id="addButton"
-          onClick={addTrashcan}
+          onClick={handleOpenDialog}
           disabled={!isLocationEnabled}
         >
           +
         </button>
+
+        <ConfirmDialog
+          open={isDialogOpen}
+          onClose={handleCloseDialog}
+          onConfirm={handleConfirmDialog}
+        />
+
         {userPosition.lat !== null && userPosition.lon !== null && (
-          <OSMap trashcans={trashcans} userPosition={userPosition} setTrashcans={setTrashcans} />
+          <OSMap
+            trashcans={trashcans}
+            userPosition={userPosition}
+            setTrashcans={setTrashcans}
+          />
         )}
       </div>
     </>
