@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
-// import { useEffect, useState } from "react";
 import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 

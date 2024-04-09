@@ -54,6 +54,8 @@ function App() {
           lon: userPosition.lon,
         };
         await TrashcanService.addTrashcan(newTrashcan);
+        const updatedTrashcans = await TrashcanService.getAll();
+        setTrashcans(updatedTrashcans);
       }
     } catch (err) {
       console.error(err);
@@ -71,7 +73,6 @@ function App() {
 
   if (modal) {
     openModal && openModal.addEventListener("click", () => modal.showModal());
-
     closeModal && closeModal.addEventListener("click", () => modal.close());
   }
 
