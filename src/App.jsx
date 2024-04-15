@@ -49,18 +49,17 @@ function App() {
   };
 
   const addTrashcan = async () => {
-    try {
-      if (isLocationEnabled) {
-        const newTrashcan = {
-          lat: userPosition.lat,
-          lon: userPosition.lon,
-        };
-        await TrashcanService.addTrashcan(newTrashcan);
-        const updatedTrashcans = await TrashcanService.getAll();
-        setTrashcans(updatedTrashcans);
-      }
-    } catch (err) {
-      console.error(err);
+    if (isLocationEnabled) {
+      const newTrashcan = {
+        lat: userPosition.lat,
+        lon: userPosition.lon,
+      };
+      const res = await TrashcanService.addTrashcan(newTrashcan);
+      console.log(res.response.status);
+      // Todo: if status 200 or 400 -> do stuff
+
+      const updatedTrashcans = await TrashcanService.getAll();
+      setTrashcans(updatedTrashcans);
     }
   };
 
