@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import TrashcanService from "./services/TrashcanService";
 import OSMap from "./components/OSMap";
 import ConfirmDialog from "./components/ConfirmDialog";
+import NotificationManager from "./components/Notification";
 import "./App.css";
 import "./index.css";
 
@@ -11,6 +12,11 @@ function App() {
   const [trashcans, setTrashcans] = useState([]);
   const [isLocationEnabled, setLocationEnabled] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState(null);
+
+  const displayNotification = (text, status, timeout) => {
+    setNotificationMessage({ text, status, timeout });
+  };
 
   const getAllTrashcans = async () => {
     try {
@@ -18,7 +24,8 @@ function App() {
       setTrashcans(res);
     } catch (err) {
       console.error("Error fetching trashcans", err);
-    }
+      displayNotification("Tietokantaan ei saada yhteyttä", "error", 60000);
+    };
   };
 
   const getLocation = () => {
@@ -55,11 +62,13 @@ function App() {
         lon: userPosition.lon,
       };
       const res = await TrashcanService.addTrashcan(newTrashcan);
-      console.log(res.response.status);
-      // Todo: if status 200 or 400 -> do stuff
-
-      const updatedTrashcans = await TrashcanService.getAll();
-      setTrashcans(updatedTrashcans);
+      if (res.status === 200) {
+        const updatedTrashcans = await TrashcanService.getAll();
+        setTrashcans(updatedTrashcans);
+        displayNotification("Roskiksen lisäys onnistui! :)", "success", 5000);
+      } else if (res.response.status === 400) {
+        displayNotification("Roskiksen lisääminen ei onnistunut! :(", "error", 5000);
+      };
     }
   };
 
@@ -149,6 +158,11 @@ function App() {
           open={isDialogOpen}
           onClose={handleCloseDialog}
           onConfirm={handleConfirmDialog}
+        />
+
+        <NotificationManager
+          message={notificationMessage}
+          setMessage={setNotificationMessage}
         />
 
         {userPosition.lat !== null && userPosition.lon !== null && (

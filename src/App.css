@@ -84,3 +84,37 @@ html, body {
   padding-top: 5px;
   padding-right: 10px;
 }
+
+.success {
+  color: green;
+  background: white;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  z-index: 400;
+  margin: auto;
+  max-width: 350px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.error {
+  color: red;
+  background: white;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  z-index: 400;
+  margin: auto;
+  max-width: 350px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
