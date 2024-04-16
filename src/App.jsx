@@ -106,7 +106,12 @@ function App() {
           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           id="openModal"
         >
-          ℹ️
+          <img
+            src="images/inffoIkoni.png"
+            alt="Trashbin"
+            width="50px"
+            height="50px "
+          ></img>
         </button>
 
         <dialog id="modal" className="dialog">
@@ -151,7 +156,12 @@ function App() {
           onClick={handleOpenDialog}
           disabled={!isLocationEnabled}
         >
-          +
+          <img
+            src="images/RoskisLisääUusi.png"
+            alt="Trashbin"
+            width="50px"
+            height="50px "
+          ></img>
         </button>
 
         <ConfirmDialog
