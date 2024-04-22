@@ -76,10 +76,13 @@ function App() {
 
   useEffect(() => {
     
-    // Checking API key
-    if(process.env.API_KEY) {
-      console.log(process.env.API_KEY);
-    };
+    // Checking API key for debugging and developing, delete this once it works !!!
+    const apiKey = import.meta.env?.VITE_API_KEY;
+    if(apiKey) {
+      console.log(apiKey);
+    } else {
+      console.log("no api key found!");
+    }
 
     getAllTrashcans();
     getLocation();
