@@ -19,29 +19,33 @@ html, body {
 }
 
 #map {
-  position: 'relative';
+  position: relative;
 }
 
-#refreshButton {
+#addButton{
   position: absolute;
   bottom: 20px;
-  left: calc(50% - 90px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 400;
-  border-radius: 10%;
-  background-color: hotpink;
-  font-size: large;
 }
 
-#addButton {
+#infoButton {
   position: absolute;
-  bottom: 20px;
-  left: calc(40%);
   z-index: 400;
-  border-radius: 25%;
-  background-color: hotpink;
-  font-size: large;
+  right: 0;
+  margin: 5px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
+#button-container button {
+  margin: 0 10px;
+}
 
 .dialog {
   max-width: 40rem;
@@ -66,17 +70,6 @@ html, body {
 #modalText {
   padding-top: 15px;
   padding-right: 15px;
-}
-
-#openModal {
-  position: absolute;
-  bottom: 20px;
-  left: calc(55%);
-  transform: translateX(-50%);
-  z-index: 400;
-  border-radius: 25%;
-  background-color: hotpink;
-  font-size: large;
 }
 
 #closeModal {

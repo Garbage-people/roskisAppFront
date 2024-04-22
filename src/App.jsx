@@ -25,7 +25,7 @@ function App() {
     } catch (err) {
       console.error("Error fetching trashcans", err);
       displayNotification("Tietokantaan ei saada yhteyttä", "error", 60000);
-    };
+    }
   };
 
   const getLocation = () => {
@@ -67,11 +67,19 @@ function App() {
         setTrashcans(updatedTrashcans);
         displayNotification("Roskiksen lisäys onnistui!", "success", 5000);
       } else if (res.response.status === 400) {
-        displayNotification("Roskiksen lisääminen ei onnistunut.", "error", 5000);
+        displayNotification(
+          "Roskiksen lisääminen ei onnistunut.",
+          "error",
+          5000
+        );
       } else if (res.response.status === 418) {
-        displayNotification("Roskiksen lisäys epäonnistui, liian lähellä toista roskista.", "error", 5000);
-      };
-    };
+        displayNotification(
+          "Roskiksen lisäys epäonnistui, liian lähellä toista roskista.",
+          "error",
+          5000
+        );
+      }
+    }
   };
 
   useEffect(() => {
@@ -93,7 +101,7 @@ function App() {
   };
 
   const modal = document.querySelector("#modal");
-  const openModal = document.querySelector("#openModal");
+  const openModal = document.querySelector("#infoButton");
   const closeModal = document.querySelector("#closeModal");
 
   if (modal) {
@@ -104,67 +112,56 @@ function App() {
   return (
     <>
       <div id="map">
-        <button
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          id="openModal"
-        >
-          <img
-            src="images/inffoIkoni.png"
-            alt="Trashbin"
-            width="50px"
-            height="50px "
-          ></img>
-        </button>
-
-        <dialog id="modal" className="dialog">
-          <button id="closeModal" className="dialog-close-btn">
-            X
+          <button id="infoButton">
+            <img
+              src="images/inffoIkoni.png"
+              alt="Trashbin"
+              width="60px"
+              height="60px"
+            ></img>
           </button>
-          <img
-            src="images/RoskisVihreä.png"
-            alt="Trashbin"
-            width="100px"
-            height="100px "
-          ></img>
-          <p>Tämä kuvake tarkoittaa roskiksen olevan käytössä</p>
 
-          <img
-            src="images/RoskisPunainen.png"
-            alt="Trashbin"
-            width="100px"
-            height="100px "
-          ></img>
-          <p>Tämä kuvake tarkoittaa roskiksen olevan täynnä</p>
+          <dialog id="modal" className="dialog">
+            <button id="closeModal" className="dialog-close-btn">
+              X
+            </button>
+            <img
+              src="images/RoskisVihreä.png"
+              alt="Trashbin"
+              width="100px"
+              height="100px"
+            ></img>
+            <p>Tämä kuvake tarkoittaa roskiksen olevan käytössä</p>
 
-          <img
-            src="images/RoskisRuksi.png"
-            alt="Trashbin"
-            width="100px"
-            height="100px "
-          ></img>
-          <p>Tämä kuva tarkoittaa rikkinäistä roskista</p>
-        </dialog>
+            <img
+              src="images/RoskisPunainen.png"
+              alt="Trashbin"
+              width="100px"
+              height="100px"
+            ></img>
+            <p>Tämä kuvake tarkoittaa roskiksen olevan täynnä</p>
 
-        <button
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          id="refreshButton"
-          onClick={refreshLocation}
-        >
-          PÄIVITÄ
-        </button>
-        <button
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          id="addButton"
-          onClick={handleOpenDialog}
-          disabled={!isLocationEnabled}
-        >
-          <img
-            src="images/RoskisLisääUusi.png"
-            alt="Trashbin"
-            width="50px"
-            height="50px "
-          ></img>
-        </button>
+            <img
+              src="images/RoskisRuksi.png"
+              alt="Trashbin"
+              width="100px"
+              height="100px"
+            ></img>
+            <p>Tämä kuva tarkoittaa rikkinäistä roskista</p>
+          </dialog>
+
+          <button
+            id="addButton"
+            onClick={handleOpenDialog}
+            disabled={!isLocationEnabled}
+          >
+            <img
+              src="images/RoskisLisääUusi.png"
+              alt="Trashbin"
+              width="85px"
+              height="85px"
+            ></img>
+          </button>
 
         <ConfirmDialog
           open={isDialogOpen}
