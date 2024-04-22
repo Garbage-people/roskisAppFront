@@ -75,8 +75,6 @@ function App() {
   };
 
   useEffect(() => {
-    // Testing API key environmental
-    console.log(API_KEY);
     getAllTrashcans();
     getLocation();
   }, []);
