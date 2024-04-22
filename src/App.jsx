@@ -65,11 +65,13 @@ function App() {
       if (res.status === 200) {
         const updatedTrashcans = await TrashcanService.getAll();
         setTrashcans(updatedTrashcans);
-        displayNotification("Roskiksen lisäys onnistui! :)", "success", 5000);
+        displayNotification("Roskiksen lisäys onnistui!", "success", 5000);
       } else if (res.response.status === 400) {
-        displayNotification("Roskiksen lisääminen ei onnistunut! :(", "error", 5000);
+        displayNotification("Roskiksen lisääminen ei onnistunut.", "error", 5000);
+      } else if (res.response.status === 418) {
+        displayNotification("Roskiksen lisäys epäonnistui, liian lähellä toista roskista.", "error", 5000);
       };
-    }
+    };
   };
 
   useEffect(() => {
