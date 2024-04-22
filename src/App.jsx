@@ -75,6 +75,12 @@ function App() {
   };
 
   useEffect(() => {
+    
+    // Checking API key
+    if(process.env.API_KEY) {
+      console.log(process.env.API_KEY);
+    };
+
     getAllTrashcans();
     getLocation();
   }, []);
