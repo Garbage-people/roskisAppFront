@@ -4,7 +4,6 @@ import OSMap from "./components/OSMap";
 import ConfirmDialog from "./components/ConfirmDialog";
 import NotificationManager from "./components/Notification";
 import "./App.css";
-import "./index.css";
 
 function App() {
   const [userPosition, setUserPosition] = useState({ lat: null, lon: null });
