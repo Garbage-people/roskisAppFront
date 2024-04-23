@@ -27,8 +27,8 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
   });
 
   const hereIcon = new Icon({
-    iconUrl: "images/HereMarker128HotPink.png",
-    iconSize: [70, 70],
+    iconUrl: "images/Nuppineula.png",
+    iconSize: [80, 80],
     iconAnchor: [16, 32],
   });
 

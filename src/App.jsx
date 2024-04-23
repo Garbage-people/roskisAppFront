@@ -118,7 +118,6 @@ function App() {
   }
 
   return (
-    <>
       <div id="map">
           <button id="infoButton">
             <img
@@ -164,7 +163,7 @@ function App() {
             disabled={!isLocationEnabled}
           >
             <img
-              src="images/RoskisLisääUusi.png"
+              src="images/RoskisLisäysUusi.png"
               alt="Trashbin"
               width="85px"
               height="85px"
@@ -190,7 +189,6 @@ function App() {
           />
         )}
       </div>
-    </>
   );
 }
 
