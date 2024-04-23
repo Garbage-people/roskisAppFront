@@ -117,3 +117,9 @@ html, body {
   right: 0;
   text-align: center;
 }
+
+@media only screen and (max-width: 600px) {
+  #addButton {
+    bottom: 80px;
+  }
+}
