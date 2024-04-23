@@ -3,6 +3,7 @@ import { Icon } from "leaflet";
 import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 import getDaysDifference from "../utils/scripts/getDaysDifference";
+import MarkerClusterGroup from 'react-leaflet-cluster';
 
 const StatusButton = ({ updateTrashcanState, trashcan, status, iconUrl }) => (
   <button onClick={() => updateTrashcanState(trashcan.id, status, trashcan.lat, trashcan.lon)}>
@@ -102,7 +103,9 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
         icon={hereIcon}
         position={[userPosition.lat, userPosition.lon]}
       />
-
+      <MarkerClusterGroup
+        chunkedLoading
+      >
       {trashcans.map((trashcan) => (
         <Marker
           key={trashcan.id}
@@ -127,6 +130,7 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
           </Popup>
         </Marker>
       ))}
+      </MarkerClusterGroup>
     </MapContainer>
   );
 }
