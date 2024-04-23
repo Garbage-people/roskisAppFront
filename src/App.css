@@ -47,10 +47,6 @@ html, body {
   border: none;
 }
 
-#button-container button {
-  margin: 0 10px;
-}
-
 .dialog {
   max-width: 40rem;
   padding: 2rem;
@@ -60,23 +56,14 @@ html, body {
   position: relative;
 }
 
-.dialog::backdrop {
+.dialog::backdrop-filter {
   background: hsl(0 0% 0% / 50%);
 }
 
 .dialog-close-btn {
-  font-size: .75em;
   position: absolute;
   top: .25em;
   right: .25em;
-}
-
-#modalText {
-  padding-top: 15px;
-  padding-right: 15px;
-}
-
-#closeModal {
   font-size: xx-large;
   padding-top: 5px;
   padding-right: 10px;

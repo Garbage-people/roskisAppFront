@@ -4,6 +4,17 @@ import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 import getDaysDifference from "../utils/scripts/getDaysDifference";
 
+const StatusButton = ({ updateTrashcanState, trashcan, status, iconUrl }) => (
+  <button onClick={() => updateTrashcanState(trashcan.id, status, trashcan.lat, trashcan.lon)}>
+    <img
+      src={iconUrl}
+      alt="Trashbin"
+      width="100px"
+      height="100px ">
+    </img>
+  </button>
+)
+
 export default function OSMap({ userPosition, trashcans, setTrashcans }) {
   const emptyIcon = new Icon({
     iconUrl: "images/RoskisVihreä.png",
@@ -109,57 +120,9 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
                 padding: "0",
               }}
             >
-              <button
-                onClick={() =>
-                  updateTrashcanState(
-                    trashcan.id,
-                    0,
-                    trashcan.lat,
-                    trashcan.lon
-                  )
-                }
-              >
-                <img
-                  src="images/RoskisVihreä.png"
-                  alt="Trashbin"
-                  width="100px"
-                  height="100px "
-                ></img>
-              </button>
-              <button
-                onClick={() =>
-                  updateTrashcanState(
-                    trashcan.id,
-                    1,
-                    trashcan.lat,
-                    trashcan.lon
-                  )
-                }
-              >
-                <img
-                  src="images/RoskisPunainen.png"
-                  alt="Trashbin"
-                  width="100px"
-                  height="100px"
-                ></img>
-              </button>
-              <button
-                onClick={() =>
-                  updateTrashcanState(
-                    trashcan.id,
-                    2,
-                    trashcan.lat,
-                    trashcan.lon
-                  )
-                }
-              >
-                <img
-                  src="images/RoskisRuksi.png"
-                  alt="Trashbin"
-                  width="100px"
-                  height="100px"
-                ></img>
-              </button>
+              <StatusButton updateTrashcanState={updateTrashcanState} trashcan={trashcan} status={0} iconUrl="images/RoskisVihreä.png"/>
+              <StatusButton updateTrashcanState={updateTrashcanState} trashcan={trashcan} status={1} iconUrl="images/RoskisPunainen.png"/>
+              <StatusButton updateTrashcanState={updateTrashcanState} trashcan={trashcan} status={2} iconUrl="images/RoskisRuksi.png"/>
             </div>
           </Popup>
         </Marker>

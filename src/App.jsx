@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TrashcanService from "./services/TrashcanService";
 import OSMap from "./components/OSMap";
 import ConfirmDialog from "./components/ConfirmDialog";
 import NotificationManager from "./components/Notification";
 import "./App.css";
+import InfoDialog from "./components/InfoDialog";
 
 function App() {
   const [userPosition, setUserPosition] = useState({ lat: null, lon: null });
@@ -12,6 +13,7 @@ function App() {
   const [isLocationEnabled, setLocationEnabled] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState(null);
+  const infoDialogRef = useRef(null);
 
   const displayNotification = (text, status, timeout) => {
     setNotificationMessage({ text, status, timeout });
@@ -82,10 +84,10 @@ function App() {
   };
 
   useEffect(() => {
-    
+
     // Checking API key for debugging and developing, delete this once it works !!!
     const apiKey = import.meta.env?.VITE_API_KEY;
-    if(apiKey) {
+    if (apiKey) {
       console.log(apiKey);
     } else {
       console.log("no api key found!");
@@ -108,67 +110,39 @@ function App() {
     setDialogOpen(false);
   };
 
-  const modal = document.querySelector("#modal");
-  const openModal = document.querySelector("#infoButton");
-  const closeModal = document.querySelector("#closeModal");
-
-  if (modal) {
-    openModal && openModal.addEventListener("click", () => modal.showModal());
-    closeModal && closeModal.addEventListener("click", () => modal.close());
-  }
+  const toggleInfoDialog = () => {
+    const infoDialog = infoDialogRef.current;
+    infoDialog.open
+      ? infoDialog.close()
+      : infoDialog.showModal()
+  };
 
   return (
       <div id="map">
-          <button id="infoButton">
-            <img
-              src="images/inffoIkoni.png"
-              alt="Trashbin"
-              width="60px"
-              height="60px"
-            ></img>
-          </button>
+        <button id="infoButton">
+          <img
+            src="images/inffoIkoni.png"
+            alt="Trashbin"
+            width="60px"
+            height="60px"
+            onClick={toggleInfoDialog}
+          ></img>
+        </button>
 
-          <dialog id="modal" className="dialog">
-            <button id="closeModal" className="dialog-close-btn">
-              X
-            </button>
-            <img
-              src="images/RoskisVihreä.png"
-              alt="Trashbin"
-              width="100px"
-              height="100px"
-            ></img>
-            <p>Tämä kuvake tarkoittaa roskiksen olevan käytössä</p>
+        <InfoDialog toggleInfoDialog={toggleInfoDialog} infoDialogRef={infoDialogRef} />
 
-            <img
-              src="images/RoskisPunainen.png"
-              alt="Trashbin"
-              width="100px"
-              height="100px"
-            ></img>
-            <p>Tämä kuvake tarkoittaa roskiksen olevan täynnä</p>
-
-            <img
-              src="images/RoskisRuksi.png"
-              alt="Trashbin"
-              width="100px"
-              height="100px"
-            ></img>
-            <p>Tämä kuva tarkoittaa rikkinäistä roskista</p>
-          </dialog>
-
-          <button
-            id="addButton"
-            onClick={handleOpenDialog}
-            disabled={!isLocationEnabled}
-          >
-            <img
-              src="images/RoskisLisäysUusi.png"
-              alt="Trashbin"
-              width="85px"
-              height="85px"
-            ></img>
-          </button>
+        <button
+          id="addButton"
+          onClick={handleOpenDialog}
+          disabled={!isLocationEnabled}
+        >
+          <img
+            src="images/RoskisLisäysUusi.png"
+            alt="Trashbin"
+            width="85px"
+            height="85px"
+          ></img>
+        </button>
 
         <ConfirmDialog
           open={isDialogOpen}
