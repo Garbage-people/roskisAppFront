@@ -19,7 +19,7 @@ html, body {
 }
 
 #map {
-  position: 'relative';
+  position: relative;
 }
 
 #refreshButton {
@@ -42,33 +42,7 @@ html, body {
   font-size: large;
 }
 
-
-.dialog {
-  max-width: 40rem;
-  padding: 2rem;
-  border: 0;
-  border-radius: 0.5rem;
-  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
-  position: relative;
-}
-
-.dialog::backdrop {
-  background: hsl(0 0% 0% / 50%);
-}
-
-.dialog-close-btn {
-  font-size: .75em;
-  position: absolute;
-  top: .25em;
-  right: .25em;
-}
-
-#modalText {
-  padding-top: 15px;
-  padding-right: 15px;
-}
-
-#openModal {
+#infoButton {
   position: absolute;
   bottom: 20px;
   left: calc(55%);
@@ -79,8 +53,36 @@ html, body {
   font-size: large;
 }
 
-#closeModal {
+.dialog {
+  max-width: 40rem;
+  padding: 2rem;
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+  position: relative;
+}
+
+.dialog::backdrop-filter {
+  background: hsl(0 0% 0% / 50%);
+}
+
+.dialog-close-btn {
+  position: absolute;
+  top: .25em;
+  right: .25em;
   font-size: xx-large;
   padding-top: 5px;
   padding-right: 10px;
 }
+
+/* #modalText {
+  padding-top: 15px;
+  padding-right: 15px;
+} */
+
+
+/* #closeModal {
+  font-size: xx-large;
+  padding-top: 5px;
+  padding-right: 10px;
+} */

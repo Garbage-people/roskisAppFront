@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TrashcanService from "./services/TrashcanService";
 import OSMap from "./components/OSMap";
 import ConfirmDialog from "./components/ConfirmDialog";
 import "./App.css";
 import "./index.css";
+import InfoDialog from "./components/InfoDialog";
+
 
 function App() {
   const [userPosition, setUserPosition] = useState({ lat: null, lon: null });
@@ -11,6 +13,9 @@ function App() {
   const [trashcans, setTrashcans] = useState([]);
   const [isLocationEnabled, setLocationEnabled] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const [isInfoDialogOpen, setInfoDialogOpen] = useState(false);
+
+  const infoDialogRef = useRef(null);
 
   const getAllTrashcans = async () => {
     try {
@@ -82,53 +87,25 @@ function App() {
     setDialogOpen(false);
   };
 
-  const modal = document.querySelector("#modal");
-  const openModal = document.querySelector("#openModal");
-  const closeModal = document.querySelector("#closeModal");
-
-  if (modal) {
-    openModal && openModal.addEventListener("click", () => modal.showModal());
-    closeModal && closeModal.addEventListener("click", () => modal.close());
-  }
+  const toggleInfoDialog = () => {
+    setInfoDialogOpen(!isInfoDialogOpen);
+    const infoDialog = infoDialogRef.current;
+    isInfoDialogOpen
+      ? infoDialog.showModal()
+      : infoDialog.close()
+  };
 
   return (
     <>
       <div id="map">
         <button
           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          id="openModal"
+          id="infoButton"
+          onClick={toggleInfoDialog}
         >
           ℹ️
         </button>
-
-        <dialog id="modal" className="dialog">
-          <button id="closeModal" className="dialog-close-btn">
-            X
-          </button>
-          <img
-            src="images/RoskisVihreä.png"
-            alt="Trashbin"
-            width="100px"
-            height="100px "
-          ></img>
-          <p>Tämä kuvake tarkoittaa roskiksen olevan käytössä</p>
-
-          <img
-            src="images/RoskisPunainen.png"
-            alt="Trashbin"
-            width="100px"
-            height="100px "
-          ></img>
-          <p>Tämä kuvake tarkoittaa roskiksen olevan täynnä</p>
-
-          <img
-            src="images/RoskisRuksi.png"
-            alt="Trashbin"
-            width="100px"
-            height="100px "
-          ></img>
-          <p>Tämä kuva tarkoittaa rikkinäistä roskista</p>
-        </dialog>
+        <InfoDialog toggleInfoDialog={toggleInfoDialog} infoDialogRef={infoDialogRef} />
 
         <button
           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
