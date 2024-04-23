@@ -118,7 +118,6 @@ function App() {
   };
 
   return (
-    <>
       <div id="map">
         <button id="infoButton">
           <img
@@ -164,7 +163,6 @@ function App() {
           />
         )}
       </div>
-    </>
   );
 }
 
