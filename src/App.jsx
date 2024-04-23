@@ -13,8 +13,6 @@ function App() {
   const [trashcans, setTrashcans] = useState([]);
   const [isLocationEnabled, setLocationEnabled] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const [isInfoDialogOpen, setInfoDialogOpen] = useState(false);
-
   const infoDialogRef = useRef(null);
 
   const getAllTrashcans = async () => {
@@ -88,11 +86,10 @@ function App() {
   };
 
   const toggleInfoDialog = () => {
-    setInfoDialogOpen(!isInfoDialogOpen);
     const infoDialog = infoDialogRef.current;
-    isInfoDialogOpen
-      ? infoDialog.showModal()
-      : infoDialog.close()
+    infoDialog.open
+      ? infoDialog.close()
+      : infoDialog.showModal()
   };
 
   return (
