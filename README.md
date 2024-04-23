@@ -2,6 +2,14 @@ Deployed to: https://roskisappfront-frontend-garbagepeople.rahtiapp.fi/
 
 ![QRcode to CSC Rahti deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/frontend_qrkoodi_rahti.png)
 
+<!--LOGO -->
+<br/>
+<p align="center">
+    <a href="https://github.com/Garbage-people/roskisAppFront">
+    <img src="public/images/LähiroskiksetLogo.png" alt="Header">
+    </a>
+</p>
+
 # Lähiroskikset application
 This is the front end code of "Lähiroskikset"-application.
 
