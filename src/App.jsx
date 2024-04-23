@@ -2,10 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import TrashcanService from "./services/TrashcanService";
 import OSMap from "./components/OSMap";
 import ConfirmDialog from "./components/ConfirmDialog";
+import NotificationManager from "./components/Notification";
 import "./App.css";
-import "./index.css";
 import InfoDialog from "./components/InfoDialog";
-
 
 function App() {
   const [userPosition, setUserPosition] = useState({ lat: null, lon: null });
@@ -13,7 +12,12 @@ function App() {
   const [trashcans, setTrashcans] = useState([]);
   const [isLocationEnabled, setLocationEnabled] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState(null);
   const infoDialogRef = useRef(null);
+
+  const displayNotification = (text, status, timeout) => {
+    setNotificationMessage({ text, status, timeout });
+  };
 
   const getAllTrashcans = async () => {
     try {
@@ -21,6 +25,7 @@ function App() {
       setTrashcans(res);
     } catch (err) {
       console.error("Error fetching trashcans", err);
+      displayNotification("Tietokantaan ei saada yhteyttä", "error", 60000);
     }
   };
 
@@ -52,22 +57,42 @@ function App() {
   };
 
   const addTrashcan = async () => {
-    try {
-      if (isLocationEnabled) {
-        const newTrashcan = {
-          lat: userPosition.lat,
-          lon: userPosition.lon,
-        };
-        await TrashcanService.addTrashcan(newTrashcan);
+    if (isLocationEnabled) {
+      const newTrashcan = {
+        lat: userPosition.lat,
+        lon: userPosition.lon,
+      };
+      const res = await TrashcanService.addTrashcan(newTrashcan);
+      if (res.status === 200) {
         const updatedTrashcans = await TrashcanService.getAll();
         setTrashcans(updatedTrashcans);
+        displayNotification("Roskiksen lisäys onnistui!", "success", 5000);
+      } else if (res.response.status === 400) {
+        displayNotification(
+          "Roskiksen lisääminen ei onnistunut.",
+          "error",
+          5000
+        );
+      } else if (res.response.status === 418) {
+        displayNotification(
+          "Roskiksen lisäys epäonnistui, liian lähellä toista roskista.",
+          "error",
+          5000
+        );
       }
-    } catch (err) {
-      console.error(err);
     }
   };
 
   useEffect(() => {
+
+    // Checking API key for debugging and developing, delete this once it works !!!
+    const apiKey = import.meta.env?.VITE_API_KEY;
+    if (apiKey) {
+      console.log(apiKey);
+    } else {
+      console.log("no api key found!");
+    }
+
     getAllTrashcans();
     getLocation();
   }, []);
@@ -95,35 +120,40 @@ function App() {
   return (
     <>
       <div id="map">
-        <button
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          id="infoButton"
-          onClick={toggleInfoDialog}
-        >
-          ℹ️
+        <button id="infoButton">
+          <img
+            src="images/inffoIkoni.png"
+            alt="Trashbin"
+            width="60px"
+            height="60px"
+            onClick={toggleInfoDialog}
+          ></img>
         </button>
+
         <InfoDialog toggleInfoDialog={toggleInfoDialog} infoDialogRef={infoDialogRef} />
 
         <button
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          id="refreshButton"
-          onClick={refreshLocation}
-        >
-          PÄIVITÄ
-        </button>
-        <button
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           id="addButton"
           onClick={handleOpenDialog}
           disabled={!isLocationEnabled}
         >
-          +
+          <img
+            src="images/RoskisLisääUusi.png"
+            alt="Trashbin"
+            width="85px"
+            height="85px"
+          ></img>
         </button>
 
         <ConfirmDialog
           open={isDialogOpen}
           onClose={handleCloseDialog}
           onConfirm={handleConfirmDialog}
+        />
+
+        <NotificationManager
+          message={notificationMessage}
+          setMessage={setNotificationMessage}
         />
 
         {userPosition.lat !== null && userPosition.lon !== null && (

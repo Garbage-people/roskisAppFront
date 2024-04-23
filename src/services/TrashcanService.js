@@ -24,9 +24,10 @@ const updateTrashcanStatus = async (trashCanState) => {
 const addTrashcan = async (newTrashcan) => {
     try {
         const res = await axios.post(`${API_URL}`, newTrashcan);
-        console.log(res.data)
+        return res;
     } catch(err) {
         console.error("Error adding a trashcan", err)
+        return err;
     }
 }
 

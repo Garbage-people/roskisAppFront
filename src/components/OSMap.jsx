@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import TrashcanService from "../services/TrashcanService";
 import "../App.css";
+import getDaysDifference from "../utils/scripts/getDaysDifference";
 
 const StatusButton = ({ updateTrashcanState, trashcan, status, iconUrl }) => (
   <button onClick={() => updateTrashcanState(trashcan.id, status, trashcan.lat, trashcan.lon)}>
@@ -44,9 +45,21 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
 
   const trashcanIcons = [emptyIcon, fullIcon, brokenIcon];
 
-  const getTrashcanIcon = (status) =>
-    // Here be dragons, as in date comparison should be implemented here
-    status.at(0) === "" ? emptyIcon : trashcanIcons.at(Number(status.at(0)));
+  const getTrashcanIcon = (status) => {
+    // TODO: test if the defaulting works with old updates
+
+    // With no status update icon defaults to empty.
+    if (status.at(1) === "") {
+      return emptyIcon;
+    }
+
+    // If the status update is few days old it gets ignored and defaults to default state.
+    if (getDaysDifference(new Date(Date.parse(status.at(1))), new Date()) > 2) {
+      return emptyIcon;
+    } else {
+      return trashcanIcons.at(Number(status.at(0)));
+    }
+  };
 
   const getLastUpdatedDate = (status) =>
     status.at(1) === ""

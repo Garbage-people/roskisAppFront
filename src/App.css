@@ -22,35 +22,29 @@ html, body {
   position: relative;
 }
 
-#refreshButton {
+#addButton{
   position: absolute;
   bottom: 20px;
-  left: calc(50% - 90px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 400;
-  border-radius: 10%;
-  background-color: hotpink;
-  font-size: large;
-}
-
-#addButton {
-  position: absolute;
-  bottom: 20px;
-  left: calc(40%);
-  z-index: 400;
-  border-radius: 25%;
-  background-color: hotpink;
-  font-size: large;
+  background-color: transparent;
+  border: none;
 }
 
 #infoButton {
   position: absolute;
-  bottom: 20px;
-  left: calc(55%);
-  transform: translateX(-50%);
   z-index: 400;
-  border-radius: 25%;
-  background-color: hotpink;
-  font-size: large;
+  right: 0;
+  margin: 5px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  background-color: transparent;
+  border: none;
 }
 
 .dialog {
@@ -75,14 +69,44 @@ html, body {
   padding-right: 10px;
 }
 
-/* #modalText {
-  padding-top: 15px;
-  padding-right: 15px;
-} */
+.success {
+  color: green;
+  background: white;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  z-index: 400;
+  margin: auto;
+  max-width: 350px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
 
+.error {
+  color: red;
+  background: white;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  z-index: 400;
+  margin: auto;
+  max-width: 350px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
 
-/* #closeModal {
-  font-size: xx-large;
-  padding-top: 5px;
-  padding-right: 10px;
-} */
+@media only screen and (max-width: 600px) {
+  #addButton {
+    bottom: 80px;
+  }
+}
