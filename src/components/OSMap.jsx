@@ -3,6 +3,7 @@ import { Icon } from "leaflet";
 import TrashcanService from "../services/TrashcanService";
 import "../App.css";
 import getDaysDifference from "../utils/scripts/getDaysDifference";
+import MarkerClusterGroup from 'react-leaflet-cluster';
 
 const StatusButton = ({ updateTrashcanState, trashcan, status, iconUrl }) => (
   <button
@@ -144,6 +145,35 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
         icon={hereIcon}
         position={[userPosition.lat, userPosition.lon]}
       />
+
+      <MarkerClusterGroup
+        chunkedLoading
+      >
+      {trashcans.map((trashcan) => (
+        <Marker
+          key={trashcan.id}
+          position={[trashcan.lat, trashcan.lon]}
+          icon={getTrashcanIcon(trashcan.status)}
+        >
+          <Popup>
+            lat: {trashcan.lat}, lon: {trashcan.lon}, viimeisin päivitys:{" "}
+            {getLastUpdatedDate(trashcan.status)}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "0",
+                padding: "0",
+              }}
+            >
+              <StatusButton updateTrashcanState={updateTrashcanState} trashcan={trashcan} status={0} iconUrl="images/RoskisVihreä.png"/>
+              <StatusButton updateTrashcanState={updateTrashcanState} trashcan={trashcan} status={1} iconUrl="images/RoskisPunainen.png"/>
+              <StatusButton updateTrashcanState={updateTrashcanState} trashcan={trashcan} status={2} iconUrl="images/RoskisRuksi.png"/>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
+      </MarkerClusterGroup>
     </MapContainer>
   );
 }
