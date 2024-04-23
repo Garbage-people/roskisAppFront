@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import TrashcanService from "./services/TrashcanService";
 import OSMap from "./components/OSMap";
+import InfoButton from "./components/InfoButton";
+import AddButton from "./components/AddButton";
+import InfoDialog from "./components/InfoDialog";
 import ConfirmDialog from "./components/ConfirmDialog";
 import NotificationManager from "./components/Notification";
 import "./App.css";
-import InfoDialog from "./components/InfoDialog";
 
 function App() {
   const [userPosition, setUserPosition] = useState({ lat: null, lon: null });
@@ -118,51 +120,37 @@ function App() {
   };
 
   return (
-      <div id="map">
-        <button id="infoButton">
-          <img
-            src="images/inffoIkoni.png"
-            alt="Trashbin"
-            width="60px"
-            height="60px"
-            onClick={toggleInfoDialog}
-          ></img>
-        </button>
+    <div id="map">
+      <InfoButton toggleInfoDialog={toggleInfoDialog} />
 
-        <InfoDialog toggleInfoDialog={toggleInfoDialog} infoDialogRef={infoDialogRef} />
+      <InfoDialog
+        toggleInfoDialog={toggleInfoDialog}
+        infoDialogRef={infoDialogRef}
+      />
+      <AddButton
+        handleOpenDialog={handleOpenDialog}
+        isLocationEnabled={isLocationEnabled}
+      />
 
-        <button
-          id="addButton"
-          onClick={handleOpenDialog}
-          disabled={!isLocationEnabled}
-        >
-          <img
-            src="images/RoskisLisäysUusi.png"
-            alt="Trashbin"
-            width="85px"
-            height="85px"
-          ></img>
-        </button>
+      <ConfirmDialog
+        open={isDialogOpen}
+        onClose={handleCloseDialog}
+        onConfirm={handleConfirmDialog}
+      />
 
-        <ConfirmDialog
-          open={isDialogOpen}
-          onClose={handleCloseDialog}
-          onConfirm={handleConfirmDialog}
+      <NotificationManager
+        message={notificationMessage}
+        setMessage={setNotificationMessage}
+      />
+
+      {userPosition.lat !== null && userPosition.lon !== null && (
+        <OSMap
+          trashcans={trashcans}
+          userPosition={userPosition}
+          setTrashcans={setTrashcans}
         />
-
-        <NotificationManager
-          message={notificationMessage}
-          setMessage={setNotificationMessage}
-        />
-
-        {userPosition.lat !== null && userPosition.lon !== null && (
-          <OSMap
-            trashcans={trashcans}
-            userPosition={userPosition}
-            setTrashcans={setTrashcans}
-          />
-        )}
-      </div>
+      )}
+    </div>
   );
 }
 
