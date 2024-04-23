@@ -137,7 +137,7 @@ function App() {
           disabled={!isLocationEnabled}
         >
           <img
-            src="images/RoskisLisääUusi.png"
+            src="images/RoskisLisäysUusi.png"
             alt="Trashbin"
             width="85px"
             height="85px"
