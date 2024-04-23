@@ -2,7 +2,12 @@ const InfoDialog = ({ toggleInfoDialog, infoDialogRef }) => {
     return (
         <dialog ref={infoDialogRef} className="dialog">
             <button onClick={toggleInfoDialog} className="dialog-close-btn">
-                X
+            <img
+                src="images/RuksiKuva.png"
+                alt="Trashbin"
+                width="100px"
+                height="100px "
+            ></img>
             </button>
             <img
                 src="images/RoskisVihreä.png"
