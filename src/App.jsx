@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import TrashcanService from "./services/TrashcanService";
 import OSMap from "./components/OSMap";
 import InfoButton from "./components/InfoButton";
@@ -8,9 +8,11 @@ import ConfirmDialog from "./components/ConfirmDialog";
 import NotificationManager from "./components/Notification";
 import "./App.css";
 
+const OSMapMemo = memo(OSMap)
+
 function App() {
   const [userPosition, setUserPosition] = useState({ lat: null, lon: null });
-  const defaultPosition = { lat: 60.1711, lon: 24.9414 };
+  const defaultPositionRef = useRef({ lat: 60.1711, lon: 24.9414 });
   const [trashcans, setTrashcans] = useState([]);
   const [isLocationEnabled, setLocationEnabled] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
@@ -43,12 +45,12 @@ function App() {
         },
         (error) => {
           console.error("Error getting location:", error);
-          setUserPosition(defaultPosition);
+          setUserPosition(defaultPositionRef.current);
           setLocationEnabled(false);
         }
       );
     } else {
-      setUserPosition(defaultPosition);
+      setUserPosition(defaultPositionRef.current);
       setLocationEnabled(false);
     }
   };
@@ -58,6 +60,7 @@ function App() {
     window.location.reload();
   };
 
+  // Bug: A user can turn off his location after having it enabled in the beginning and add a trashcan
   const addTrashcan = async () => {
     if (isLocationEnabled) {
       const newTrashcan = {
@@ -144,7 +147,7 @@ function App() {
       />
 
       {userPosition.lat !== null && userPosition.lon !== null && (
-        <OSMap
+        <OSMapMemo
           trashcans={trashcans}
           userPosition={userPosition}
           setTrashcans={setTrashcans}
