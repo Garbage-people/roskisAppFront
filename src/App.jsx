@@ -88,15 +88,15 @@ function App() {
   useEffect(() => {
 
     // Checking API key for debugging and developing, delete this once it works !!!
-    const apiKey = import.meta.env?.VITE_API_KEY;
-    if (apiKey) {
-      console.log(apiKey);
-    } else {
-      console.log("no api key found!");
+    const apiKeyFromEnv = import.meta.env.VITE_API_KEY;
+    if (apiKeyFromEnv) {
+      console.log(apiKeyFromEnv);
     }
 
     getAllTrashcans();
+
     getLocation();
+
   }, []);
 
   const handleOpenDialog = () => {
