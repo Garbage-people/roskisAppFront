@@ -19,6 +19,7 @@ function App() {
     setNotificationMessage({ text, status, timeout });
   };
 
+  //Gets all trashcan locations from the database
   const getAllTrashcans = async () => {
     try {
       const res = await TrashcanService.getAll();
@@ -29,6 +30,7 @@ function App() {
     }
   };
 
+  //Calculates users location on the map
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(

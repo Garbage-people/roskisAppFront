@@ -17,6 +17,8 @@ const StatusButton = ({ updateTrashcanState, trashcan, status, iconUrl }) => (
 );
 
 export default function OSMap({ userPosition, trashcans, setTrashcans }) {
+
+  //Different types of icons shown on the map (all trashcan icons and the user location pointer)
   const emptyIcon = new Icon({
     iconUrl: "images/RoskisVihreä.png",
     iconSize: [70, 70],
