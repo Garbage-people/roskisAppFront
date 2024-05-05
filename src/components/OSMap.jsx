@@ -66,7 +66,7 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
 
   const getLastUpdatedDate = (status) =>
     status.at(1) === ""
-      ? "never"
+      ? "ei tietoa"
       : new Date(Date.parse(status.at(1))).toLocaleString("fi-FI");
 
   const updateTrashcanState = async (id, status, lat, lon) => {
