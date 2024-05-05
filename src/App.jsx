@@ -18,6 +18,7 @@ function App() {
     setNotificationMessage({ text, status, timeout });
   };
 
+  //Gets all trashcan locations from the database
   const getAllTrashcans = async () => {
     try {
       const res = await TrashcanService.getAll();

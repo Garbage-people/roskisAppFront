@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 
 /**
- * Returns either the user position or a default position
+ * Returns either the users GPS position or a default position
  * @returns {{userPosition: {lat: number, lon: number}, isLocationEnabled: boolean}}
  */
 const useLocation = () => {

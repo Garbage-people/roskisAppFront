@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 
+// Notification component - renders the actual notification message
 const Notification = ({message}) => {
     if(message === null) {
         return null
@@ -8,6 +9,7 @@ const Notification = ({message}) => {
     return <div className={message.status}>{message.text}</div>;
 }
 
+// NotificationManager component - manages the display of notifications
 const NotificationManager = ({message, setMessage}) => {
   useEffect(() => {
     if(message !== null) {
@@ -19,6 +21,7 @@ const NotificationManager = ({message, setMessage}) => {
     }
   }, [message, setMessage])
 
+  // Render the Notification component with the current message
   return <Notification message={message}/>
 };
 
