@@ -103,8 +103,7 @@ const NewTrashcanDialog = ({
           </DialogContentText>
           {recaptchaError && <p style={{ color: "red" }}>{recaptchaError}</p>}
           <ReCAPTCHA
-            // sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // TEST KEY
-            sitekey="6Lf_uMopAAAAAAhhq8T6O9IPpO9gNZgxjXbJBXpN" // real site key
+            sitekey="6Lf_uMopAAAAAAhhq8T6O9IPpO9gNZgxjXbJBXpN"
             onChange={(token) => setRecaptchaToken(token)}
           />
         </DialogContent>

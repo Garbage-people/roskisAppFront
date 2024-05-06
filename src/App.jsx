@@ -29,19 +29,7 @@ function App() {
     }
   };
 
-  // this is a cheat way of refreshing user location would possibly like to modify it later to update OSMap "center"-property back to user location
-  // const refreshLocation = () => {
-  //   window.location.reload();
-  // };
-
   useEffect(() => {
-    // Checking API key for debugging and developing, delete this once it works !!!
-    const apiKey = import.meta.env?.VITE_API_KEY;
-    if (apiKey) {
-      console.log(apiKey);
-    } else {
-      console.log("no api key found!");
-    }
     getAllTrashcans();
   }, []);
 
