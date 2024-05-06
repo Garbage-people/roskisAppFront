@@ -40,9 +40,9 @@ const InfoDialog = () => {
 
         <h1>Lähiroskikset</h1>
         <p>
-        Roskisapp helpottaa Helsingin kaupungissa liikkuvien ja siisteydestä välittävien päivittäistä toimintaa.
+          Lähiroskikset helpottavat Helsingin kaupungissa liikkuvien ja siisteydestä välittävien päivittäistä toimintaa.
 
-        Sovelluksessa on mahdollista päivittää täyttöastetta kuvaava ikoni, jotta sovelluksesta löytyy ajankohtaista tietoa roskisten tilasta. Voit myös lisätä kartalle uuden ikonin, jos huomaat ulkona roska-astian, joka puuttuu kartalta.
+          Sovelluksessa on mahdollista päivittää täyttöastetta kuvaava ikoni, jotta sovelluksesta löytyy ajankohtaista tietoa roskisten tilasta. Voit myös lisätä kartalle uuden ikonin, jos huomaat ulkona roska-astian, joka puuttuu kartalta.
         </p>
 
         <h2>Kuvakkeet</h2>
@@ -68,7 +68,7 @@ const InfoDialog = () => {
           width="100px"
           height="100px "
         ></img>
-        <p>Tämä kuva tarkoittaa rikkinäistä, tai jollain tavalla estettyä roskista.</p>
+        <p>Tämä kuvake tarkoittaa rikkinäistä, tai jollain tavalla estettyä roskista.</p>
 
         <img
           src="images/RoskisLisäysUusi.png"
@@ -76,11 +76,10 @@ const InfoDialog = () => {
           width="100px"
           height="100px "
         ></img>
-        <p> 
-            Tällä napilla voit lisätä kartalle uuden roskiskuvakkeen kuvaamaan löytämäsi roskiksen sijaintia. 
-            Lisääminen onnistuu napista, jonka kuvakkeessa roska-astian yllä on + -merkki. 
-            Roska-astian lisääminen onnistuu siinä kohdassa, jossa olet. Et voi valita lisäämiselle paikkaa. 
-            Voit lisätä uuden ikonin vain jos kyseisestä kohdasta ei löydy vielä roska-astian ikonia.
+        <p>
+          Tällä napilla voit lisätä kartalle uuden roskiskuvakkeen kuvaamaan löytämäsi roskiksen sijaintia.
+          Roska-astian lisääminen onnistuu siinä kohdassa, jossa olet. Et voi valita lisäämiselle paikkaa.
+          Voit lisätä uuden ikonin vain jos kyseisestä kohdasta ei löydy vielä roska-astian ikonia.
         </p>
       </dialog>
     </>

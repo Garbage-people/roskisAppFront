@@ -16,6 +16,7 @@ You can access the application with your mobile phone here:
 ![QRcode to CSC Rahti deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/frontend_qrkoodi_rahti.png)
 
 ***
+<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0010.jpg" width="250"> </kbd>
 ***
 ## Technologies Used on This Project
 
@@ -23,7 +24,7 @@ You can access the application with your mobile phone here:
 * [Rest](https://spring.io/projects/spring-restdocs)
 * [OpenStreetMap](https://www.openstreetmap.org/about)
 * [ReactLeaflet](https://react-leaflet.js.org/)
-* The application has been deployed to CSC Rahti: https://roskisappfront-frontend-garbagepeople.rahtiapp.fi/
+* The application has been deployed to [CSC Rahti](https://rahti.csc.fi/): https://roskisappfront-frontend-garbagepeople.rahtiapp.fi/
 
 ## Getting Started Locally
 
@@ -43,6 +44,8 @@ After running the necessary command and also installing the backend of this appl
 ```
 
 It will start the application. The port which is used when running locally is localhost:5173.
+
+The backend for this project can be found here: https://github.com/Garbage-people/roskisAppBack
 
 ## Quick Guide to LähiRoskikset
 
