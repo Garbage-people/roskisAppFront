@@ -29,6 +29,9 @@ https://roskisappfront-frontend-garbagepeople.rahtiapp.fi/
 <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0009.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0008.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0014.jpg" width="250"> </kbd>
 
 ***
+## Architecture Diagram
+<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/ArchitectureDiagram.png"> </kbd>
+
 ## Technologies Used on This Project
 
 * [React+Vite](https://vitejs.dev/guide/)
