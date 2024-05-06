@@ -25,7 +25,7 @@ const InfoDialog = () => {
   };
 
   return (
-    //Inffo pop-up window that shows the basic information about the app and its functionalities
+    //Info pop-up window that shows the basic information about the app and its functionalities
     <>
       <InfoButton toggleInfoDialog={toggleInfoDialog} />
       <dialog ref={infoDialogRef} className="dialog">

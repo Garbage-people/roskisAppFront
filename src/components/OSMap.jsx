@@ -105,51 +105,53 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
         icon={hereIcon}
         position={[userPosition.lat, userPosition.lon]}
       />
-
-      <MarkerClusterGroup chunkedLoading>
-        {trashcans.map((trashcan) => (
-          <Marker
-            zIndexOffset={false}
-            key={trashcan.id}
-            position={[trashcan.lat, trashcan.lon]}
-            icon={getTrashcanIcon(trashcan.status)}
-          >
-            <Popup closeButton={false}>
-              <div style={{ textAlign: "center" }}>
-                {/* lat: {trashcan.lat}, lon: {trashcan.lon},  */}
-                Viimeisin päivitys: {getLastUpdatedDate(trashcan.status)}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  margin: "20px 0",
-                  padding: "0",
-                }}
-              >
-                <StatusButton
-                  updateTrashcanState={updateTrashcanState}
-                  trashcan={trashcan}
-                  status={0}
-                  iconUrl="images/RoskisVihreä.png"
-                />
-                <StatusButton
-                  updateTrashcanState={updateTrashcanState}
-                  trashcan={trashcan}
-                  status={1}
-                  iconUrl="images/RoskisPunainen.png"
-                />
-                <StatusButton
-                  updateTrashcanState={updateTrashcanState}
-                  trashcan={trashcan}
-                  status={2}
-                  iconUrl="images/RoskisRuksi.png"
-                />
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
+      {/* React only renders the trashcan markers if they exist to prevent the app from crashing */}
+      {trashcans !== null &&
+        <MarkerClusterGroup chunkedLoading>
+          {trashcans.map((trashcan) => (
+            <Marker
+              zIndexOffset={false}
+              key={trashcan.id}
+              position={[trashcan.lat, trashcan.lon]}
+              icon={getTrashcanIcon(trashcan.status)}
+            >
+              <Popup closeButton={false}>
+                <div style={{ textAlign: "center" }}>
+                  {/* lat: {trashcan.lat}, lon: {trashcan.lon},  */}
+                  Viimeisin päivitys: {getLastUpdatedDate(trashcan.status)}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    margin: "20px 0",
+                    padding: "0",
+                  }}
+                >
+                  <StatusButton
+                    updateTrashcanState={updateTrashcanState}
+                    trashcan={trashcan}
+                    status={0}
+                    iconUrl="images/RoskisVihreä.png"
+                  />
+                  <StatusButton
+                    updateTrashcanState={updateTrashcanState}
+                    trashcan={trashcan}
+                    status={1}
+                    iconUrl="images/RoskisPunainen.png"
+                  />
+                  <StatusButton
+                    updateTrashcanState={updateTrashcanState}
+                    trashcan={trashcan}
+                    status={2}
+                    iconUrl="images/RoskisRuksi.png"
+                  />
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+      }
     </MapContainer>
   );
 }
