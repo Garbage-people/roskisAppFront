@@ -1,5 +1,5 @@
-// import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import TrashcanService from "../services/TrashcanService";
 import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
@@ -21,50 +21,61 @@ const AddButton = ({ handleOpenDialog, isAddingEnabled }) => (
       height="85px"
     ></img>
   </button>
-)
+);
 
-const NewTrashcanDialog = ({ userPosition, setTrashcans, displayNotification, isAddingEnabled }) => {
+const NewTrashcanDialog = ({
+  userPosition,
+  setTrashcans,
+  displayNotification,
+  isAddingEnabled,
+}) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
-
-  // Bug: A user can turn off his location after having it enabled in the beginning and add a trashcan
-  const addTrashcan = async () => {
-    if (isAddingEnabled) {
-      const newTrashcan = {
-        lat: userPosition.lat,
-        lon: userPosition.lon,
-      };
-      const res = await TrashcanService.addTrashcan(newTrashcan);
-      if (res.status === 200) {
-        const updatedTrashcans = await TrashcanService.getAll();
-        setTrashcans(updatedTrashcans);
-        displayNotification("Roskiksen lisäys onnistui!", "success", 5000);
-      } else if (res.response.status === 418) {
-        displayNotification(
-          "Roskiksen lisäys epäonnistui, liian lähellä toista roskista.",
-          "error",
-          5000
-        );
-      } else {
-        displayNotification(
-          "Roskiksen lisääminen ei onnistunut.",
-          "error",
-          5000
-        );
-      }
-    }
-  };
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const [recaptchaError, setRecaptchaError] = useState(null);
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
   };
 
   const handleCloseDialog = () => {
+    setRecaptchaToken(null);
+    setRecaptchaError(null);
     setDialogOpen(false);
   };
 
-  const handleConfirmDialog = () => {
-    addTrashcan();
-    setDialogOpen(false);
+  const handleConfirmDialog = async () => {
+    if (!recaptchaToken) {
+      setRecaptchaError("Please complete the reCAPTCHA challenge.");
+      return;
+    }
+    if (isAddingEnabled) {
+      const newTrashcan = {
+        lat: userPosition.lat,
+        lon: userPosition.lon,
+      };
+      const res = await TrashcanService.addTrashcan(
+        newTrashcan,
+        recaptchaToken
+      );
+      if (res.status === 200) {
+        const updatedTrashcans = await TrashcanService.getAll();
+        setTrashcans(updatedTrashcans);
+        displayNotification("Roskiksen lisäys onnistui!", "success", 5000);
+      }
+    } else if (res.response.status === 418) {
+      displayNotification(
+        "Roskiksen lisäys epäonnistui, liian lähellä toista roskista.",
+        "error",
+        5000
+      );
+    } else {
+      displayNotification(
+        "Roskiksen lisääminen ei onnistunut.",
+        "error",
+        5000
+      );
+    }
+    handleCloseDialog();
   };
 
   return (
@@ -85,16 +96,26 @@ const NewTrashcanDialog = ({ userPosition, setTrashcans, displayNotification, is
             Huom. jos olet liian lähellä toista roskista, <br />
             et voi lisätä kartalle uutta roskista.
           </DialogContentText>
+          {recaptchaError && <p style={{ color: "red" }}>{recaptchaError}</p>}
+          <ReCAPTCHA
+            // sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // TEST KEY
+            sitekey="6Lf_uMopAAAAAAhhq8T6O9IPpO9gNZgxjXbJBXpN" // real site key
+            onChange={(token) => setRecaptchaToken(token)}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>Hylkää</Button>
-          <Button onClick={handleConfirmDialog} autoFocus>
+          <Button
+            onClick={handleConfirmDialog}
+            autoFocus
+            disabled={!isAddingEnabled || !recaptchaToken}
+          >
             Lisää
           </Button>
         </DialogActions>
       </Dialog>
     </>
   );
-}
+};
 
-export default NewTrashcanDialog
+export default NewTrashcanDialog;

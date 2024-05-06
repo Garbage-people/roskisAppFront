@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL =
   "https://roskisappback-backend-garbagepeople.rahtiapp.fi/api/trashcans";
-  // "http://localhost:8080/api/trashcans";
+// "http://localhost:8080/api/trashcans";
 
 const getAll = async () => {
   try {
@@ -22,9 +22,13 @@ const updateTrashcanStatus = async (trashCanState) => {
   };
 };
 
-const addTrashcan = async (newTrashcan) => {
+const addTrashcan = async (newTrashcan, recaptchaToken) => {
+  const headers = {
+    "Content-Type": "application/json",
+    "recaptcha-token": recaptchaToken,
+  }
   try {
-    const res = await axios.post(`${API_URL}`, newTrashcan);
+    const res = await axios.post(`${API_URL}`, newTrashcan, { headers });
     return res;
   } catch (err) {
     console.error("Error adding a trashcan", err)
