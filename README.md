@@ -11,12 +11,17 @@ This application has been created as a group project for Haaga-Helia's course So
 
 On the map there can be seen three different coloured icons for trashcans based on their statuses. You, as the user, are able to change the statuses of trachcans, if you notice a trashcan which is full. This will make the use of the application more enjoyable and accurate for all users. If you are somewhere around Helsinki and you find a trashcan which is not on the map, you can add it by using the adding functionality. Also on the top right corner you can find an info button to ensure that the use of the application is clear to everyone.
 
+The data for this project has been provided by the City of Helsinki.
+
 You can access the application with your mobile phone here: 
 
 ![QRcode to CSC Rahti deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/frontend_qrkoodi_rahti.png)
 
 ***
-<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0010.jpg" width="250"> </kbd>
+<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0010.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0011.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0013.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0012.jpg" width="250"> </kbd>
+
+<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-info.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-info2.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0009.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0008.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0014.jpg" width="250"> </kbd>
+
 ***
 ## Technologies Used on This Project
 
@@ -29,7 +34,9 @@ You can access the application with your mobile phone here:
 ## Getting Started Locally
 
 The first step in using the application locally is to download or git clone it to your device.
-
+```
+git clone https://github.com/Garbage-people/roskisAppFront.git
+```
 In addition to installing the application locally, it is necessary to run command:
 ```
  npm install. 
@@ -66,6 +73,7 @@ In the application you are able to add trashcans. The adding ability is so that 
 However to minimize the misuse of the application, you are only able to add trashcans to your location. You are not given the ability to choose a spot for the trashcan. 
 
 When adding a trashcan, the system will check if there is already an icon in that spot. If the icon to add is too close to an already existing icon, the adding will not be done. 
+
 
 
 ## Authors
