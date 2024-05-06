@@ -61,22 +61,22 @@ const NewTrashcanDialog = ({
         const updatedTrashcans = await TrashcanService.getAll();
         setTrashcans(updatedTrashcans);
         displayNotification("Roskiksen lisäys onnistui!", "success", 5000);
+      } else if (res.response.status === 418) {
+        displayNotification(
+          "Roskiksen lisäys epäonnistui, liian lähellä toista roskista.",
+          "error",
+          5000
+        );
+      } else {
+        displayNotification(
+          "Roskiksen lisääminen ei onnistunut.",
+          "error",
+          5000
+        );
       }
-    } else if (res.response.status === 418) {
-      displayNotification(
-        "Roskiksen lisäys epäonnistui, liian lähellä toista roskista.",
-        "error",
-        5000
-      );
-    } else {
-      displayNotification(
-        "Roskiksen lisääminen ei onnistunut.",
-        "error",
-        5000
-      );
-    }
-    handleCloseDialog();
-  };
+      handleCloseDialog();
+    };
+  }
 
   return (
     //Pop-up window making sure you dont accidentaly add a new trashcan
@@ -116,6 +116,7 @@ const NewTrashcanDialog = ({
       </Dialog>
     </>
   );
-};
+}
 
-export default NewTrashcanDialog;
+
+export default NewTrashcanDialog
