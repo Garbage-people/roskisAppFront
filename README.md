@@ -18,9 +18,13 @@ You can access the application with your mobile phone here:
 ![QRcode to CSC Rahti deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/frontend_qrkoodi_rahti.png)
 
 ***
-<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0010.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0011.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0013.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0012.jpg" width="250"> </kbd>
+<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0010.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0011.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0013.jpg" width="250"> </kbd>
 
-<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-info.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-info2.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0009.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0008.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0014.jpg" width="250"> </kbd>
+<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0012.jpg" width="250"> </kbd>
+<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-info.jpg" width="250"> </kbd> 
+<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-info2.jpg" width="250"> </kbd> 
+
+<kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0009.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0008.jpg" width="250"> </kbd> <kbd> <img src="https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/IMG-20240506-WA0014.jpg" width="250"> </kbd>
 
 ***
 ## Technologies Used on This Project
