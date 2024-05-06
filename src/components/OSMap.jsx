@@ -6,17 +6,19 @@ import getDaysDifference from "../utils/scripts/getDaysDifference";
 import MarkerClusterGroup from 'react-leaflet-cluster';
 
 const StatusButton = ({ updateTrashcanState, trashcan, status, iconUrl }) => (
-  <button onClick={() => updateTrashcanState(trashcan.id, status, trashcan.lat, trashcan.lon)}>
-    <img
-      src={iconUrl}
-      alt="Trashbin"
-      width="100px"
-      height="100px ">
-    </img>
+  <button
+    id="statusButton"
+    onClick={() =>
+      updateTrashcanState(trashcan.id, status, trashcan.lat, trashcan.lon)
+    }
+  >
+    <img src={iconUrl} alt="Trashbin" width="100px" height="100px "></img>
   </button>
-)
+);
 
 export default function OSMap({ userPosition, trashcans, setTrashcans }) {
+
+  //Different types of icons shown on the map (all trashcan icons and the user location pointer)
   const emptyIcon = new Icon({
     iconUrl: "images/RoskisVihreä.png",
     iconSize: [70, 70],
@@ -64,7 +66,7 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
 
   const getLastUpdatedDate = (status) =>
     status.at(1) === ""
-      ? "never"
+      ? "ei tietoa"
       : new Date(Date.parse(status.at(1))).toLocaleString("fi-FI");
 
   const updateTrashcanState = async (id, status, lat, lon) => {
@@ -103,33 +105,50 @@ export default function OSMap({ userPosition, trashcans, setTrashcans }) {
         icon={hereIcon}
         position={[userPosition.lat, userPosition.lon]}
       />
-      <MarkerClusterGroup
-        chunkedLoading
-      >
-      {trashcans.map((trashcan) => (
-        <Marker
-          key={trashcan.id}
-          position={[trashcan.lat, trashcan.lon]}
-          icon={getTrashcanIcon(trashcan.status)}
-        >
-          <Popup>
-            lat: {trashcan.lat}, lon: {trashcan.lon}, viimeisin päivitys:{" "}
-            {getLastUpdatedDate(trashcan.status)}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                margin: "0",
-                padding: "0",
-              }}
-            >
-              <StatusButton updateTrashcanState={updateTrashcanState} trashcan={trashcan} status={0} iconUrl="images/RoskisVihreä.png"/>
-              <StatusButton updateTrashcanState={updateTrashcanState} trashcan={trashcan} status={1} iconUrl="images/RoskisPunainen.png"/>
-              <StatusButton updateTrashcanState={updateTrashcanState} trashcan={trashcan} status={2} iconUrl="images/RoskisRuksi.png"/>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+
+      <MarkerClusterGroup chunkedLoading>
+        {trashcans.map((trashcan) => (
+          <Marker
+            zIndexOffset={false}
+            key={trashcan.id}
+            position={[trashcan.lat, trashcan.lon]}
+            icon={getTrashcanIcon(trashcan.status)}
+          >
+            <Popup closeButton={false}>
+              <div style={{ textAlign: "center" }}>
+                {/* lat: {trashcan.lat}, lon: {trashcan.lon},  */}
+                Viimeisin päivitys: {getLastUpdatedDate(trashcan.status)}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "20px 0",
+                  padding: "0",
+                }}
+              >
+                <StatusButton
+                  updateTrashcanState={updateTrashcanState}
+                  trashcan={trashcan}
+                  status={0}
+                  iconUrl="images/RoskisVihreä.png"
+                />
+                <StatusButton
+                  updateTrashcanState={updateTrashcanState}
+                  trashcan={trashcan}
+                  status={1}
+                  iconUrl="images/RoskisPunainen.png"
+                />
+                <StatusButton
+                  updateTrashcanState={updateTrashcanState}
+                  trashcan={trashcan}
+                  status={2}
+                  iconUrl="images/RoskisRuksi.png"
+                />
+              </div>
+            </Popup>
+          </Marker>
+        ))}
       </MarkerClusterGroup>
     </MapContainer>
   );
