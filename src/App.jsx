@@ -20,12 +20,10 @@ function App() {
 
   //Gets all trashcan locations from the database
   const getAllTrashcans = async () => {
-    try {
-      const res = await TrashcanService.getAll();
-      setTrashcans(res);
-    } catch (err) {
-      console.error("Error fetching trashcans", err);
-      displayNotification("Tietokantaan ei saada yhteyttä", "error", 60000);
+    const res = await TrashcanService.getAll();
+    setTrashcans(res);
+    if (res === null) {
+      displayNotification("Tietokantaan ei saada yhteyttä", "error", 60000)
     }
   };
 
@@ -40,7 +38,7 @@ function App() {
         userPosition={userPosition}
         setTrashcans={setTrashcans}
         displayNotification={displayNotification}
-        isLocationEnabled={isLocationEnabled}
+        isAddingEnabled={trashcans !== null && isLocationEnabled === true}
       />
       <NotificationManager
         message={notificationMessage}

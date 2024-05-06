@@ -8,11 +8,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const AddButton = ({ handleOpenDialog, isLocationEnabled }) => (
+const AddButton = ({ handleOpenDialog, isAddingEnabled }) => (
   <button
     id="addButton"
     onClick={handleOpenDialog}
-    disabled={!isLocationEnabled}
+    disabled={!isAddingEnabled}
   >
     <img
       src="images/RoskisLisäysUusi.png"
@@ -27,7 +27,7 @@ const NewTrashcanDialog = ({
   userPosition,
   setTrashcans,
   displayNotification,
-  isLocationEnabled,
+  isAddingEnabled,
 }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
@@ -48,8 +48,7 @@ const NewTrashcanDialog = ({
       setRecaptchaError("Please complete the reCAPTCHA challenge.");
       return;
     }
-
-    if (isLocationEnabled) {
+    if (isAddingEnabled) {
       const newTrashcan = {
         lat: userPosition.lat,
         lon: userPosition.lon,
@@ -62,31 +61,27 @@ const NewTrashcanDialog = ({
         const updatedTrashcans = await TrashcanService.getAll();
         setTrashcans(updatedTrashcans);
         displayNotification("Roskiksen lisäys onnistui!", "success", 5000);
-        setDialogOpen(false);
-      } else if (res.response.status === 400) {
-        displayNotification(
-          "Roskiksen lisääminen ei onnistunut.",
-          "error",
-          5000
-        );
-        setDialogOpen(false);
       } else if (res.response.status === 418) {
         displayNotification(
           "Roskiksen lisäys epäonnistui, liian lähellä toista roskista.",
           "error",
           5000
         );
-        setDialogOpen(false);
+      } else {
+        displayNotification(
+          "Roskiksen lisääminen ei onnistunut.",
+          "error",
+          5000
+        );
       }
-    }
-    setRecaptchaToken(null);
-    setRecaptchaError(null);
-  };
+      handleCloseDialog();
+    };
+  }
 
   return (
     //Pop-up window making sure you dont accidentaly add a new trashcan
     <>
-      <AddButton handleOpenDialog={handleOpenDialog} isLocationEnabled={isLocationEnabled} />
+      <AddButton handleOpenDialog={handleOpenDialog} isAddingEnabled={isAddingEnabled} />
       <Dialog
         open={isDialogOpen}
         onClose={handleCloseDialog}
@@ -112,7 +107,7 @@ const NewTrashcanDialog = ({
           <Button
             onClick={handleConfirmDialog}
             autoFocus
-            disabled={!isLocationEnabled || !recaptchaToken}
+            disabled={!isAddingEnabled || !recaptchaToken}
           >
             Lisää
           </Button>
@@ -120,6 +115,7 @@ const NewTrashcanDialog = ({
       </Dialog>
     </>
   );
-};
+}
 
-export default NewTrashcanDialog;
+
+export default NewTrashcanDialog
