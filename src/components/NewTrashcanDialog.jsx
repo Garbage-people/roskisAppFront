@@ -8,11 +8,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const AddButton = ({ handleOpenDialog, isLocationEnabled }) => (
+const AddButton = ({ handleOpenDialog, isAddingEnabled }) => (
   <button
     id="addButton"
     onClick={handleOpenDialog}
-    disabled={!isLocationEnabled}
+    disabled={!isAddingEnabled}
   >
     <img
       src="images/RoskisLisäysUusi.png"
@@ -23,12 +23,12 @@ const AddButton = ({ handleOpenDialog, isLocationEnabled }) => (
   </button>
 )
 
-const NewTrashcanDialog = ({ userPosition, setTrashcans, displayNotification, isLocationEnabled }) => {
+const NewTrashcanDialog = ({ userPosition, setTrashcans, displayNotification, isAddingEnabled }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
 
   // Bug: A user can turn off his location after having it enabled in the beginning and add a trashcan
   const addTrashcan = async () => {
-    if (isLocationEnabled) {
+    if (isAddingEnabled) {
       const newTrashcan = {
         lat: userPosition.lat,
         lon: userPosition.lon,
@@ -38,15 +38,15 @@ const NewTrashcanDialog = ({ userPosition, setTrashcans, displayNotification, is
         const updatedTrashcans = await TrashcanService.getAll();
         setTrashcans(updatedTrashcans);
         displayNotification("Roskiksen lisäys onnistui!", "success", 5000);
-      } else if (res.response.status === 400) {
-        displayNotification(
-          "Roskiksen lisääminen ei onnistunut.",
-          "error",
-          5000
-        );
       } else if (res.response.status === 418) {
         displayNotification(
           "Roskiksen lisäys epäonnistui, liian lähellä toista roskista.",
+          "error",
+          5000
+        );
+      } else {
+        displayNotification(
+          "Roskiksen lisääminen ei onnistunut.",
           "error",
           5000
         );
@@ -70,7 +70,7 @@ const NewTrashcanDialog = ({ userPosition, setTrashcans, displayNotification, is
   return (
     //Pop-up window making sure you dont accidentaly add a new trashcan
     <>
-      <AddButton handleOpenDialog={handleOpenDialog} isLocationEnabled={isLocationEnabled} />
+      <AddButton handleOpenDialog={handleOpenDialog} isAddingEnabled={isAddingEnabled} />
       <Dialog
         open={isDialogOpen}
         onClose={handleCloseDialog}
