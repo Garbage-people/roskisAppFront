@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API_URL =
-//   "https://roskisappback-backend-garbagepeople.rahtiapp.fi/api/trashcans";
- "http://localhost:8080/api/trashcans";
+  "https://roskisappback-backend-garbagepeople.rahtiapp.fi/api/trashcans";
+//  "http://localhost:8080/api/trashcans";
 
 const getAll = async () => {
     try {
