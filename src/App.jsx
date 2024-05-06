@@ -7,7 +7,7 @@ import NewTrashcanDialog from "./components/NewTrashcanDialog";
 import NotificationManager from "./components/NotificationManager";
 import "./App.css";
 
-const OSMapMemo = memo(OSMap)
+const OSMapMemo = memo(OSMap);
 
 function App() {
   const [trashcans, setTrashcans] = useState([]);
@@ -23,7 +23,7 @@ function App() {
     const res = await TrashcanService.getAll();
     setTrashcans(res);
     if (res === null) {
-      displayNotification("Tietokantaan ei saada yhteyttä", "error", 60000)
+      displayNotification("Tietokantaan ei saada yhteyttä", "error", 60000);
     }
   };
 
@@ -45,12 +45,14 @@ function App() {
         setMessage={setNotificationMessage}
       />
       {/* If trashcan data is not available, the whole app crashes. Maybe an alternative empty map without markers? */}
-      {userPosition.lat !== null && userPosition.lon !== null && (
+      {userPosition.lat !== null && userPosition.lon !== null ? (
         <OSMapMemo
           trashcans={trashcans}
           userPosition={userPosition}
           setTrashcans={setTrashcans}
         />
+      ) : (
+        "Loading..."
       )}
     </div>
   );
