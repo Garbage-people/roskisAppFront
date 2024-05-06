@@ -13,7 +13,9 @@ On the map there can be seen three different coloured icons for trashcans based 
 
 The data for this project has been provided by the City of Helsinki.
 
-You can access the application with your mobile phone here: 
+The application has been deployed to CSC Rahti. You can acceess it using link or the given QR code: 
+
+https://roskisappfront-frontend-garbagepeople.rahtiapp.fi/
 
 ![QRcode to CSC Rahti deployment](https://github.com/Garbage-people/roskisAppFront/blob/main/public/images/frontend_qrkoodi_rahti.png)
 
@@ -33,7 +35,7 @@ You can access the application with your mobile phone here:
 * [Rest](https://spring.io/projects/spring-restdocs)
 * [OpenStreetMap](https://www.openstreetmap.org/about)
 * [ReactLeaflet](https://react-leaflet.js.org/)
-* The application has been deployed to [CSC Rahti](https://rahti.csc.fi/): https://roskisappfront-frontend-garbagepeople.rahtiapp.fi/
+* [CSC Rahti](https://rahti.csc.fi/)
 
 ## Getting Started Locally
 
