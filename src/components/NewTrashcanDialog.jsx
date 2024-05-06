@@ -84,8 +84,9 @@ const NewTrashcanDialog = ({
   };
 
   return (
+    //Pop-up window making sure you dont accidentaly add a new trashcan
     <>
-      <AddButton handleOpenDialog={handleOpenDialog} isLocationEnabled />
+      <AddButton handleOpenDialog={handleOpenDialog} isLocationEnabled={isLocationEnabled} />
       <Dialog
         open={isDialogOpen}
         onClose={handleCloseDialog}

@@ -1,4 +1,5 @@
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useState } from "react";
+import useLocation from "./hooks/useLocation";
 import TrashcanService from "./services/TrashcanService";
 import OSMap from "./components/OSMap";
 import InfoDialog from "./components/InfoDialog";
@@ -9,16 +10,15 @@ import "./App.css";
 const OSMapMemo = memo(OSMap)
 
 function App() {
-  const [userPosition, setUserPosition] = useState({ lat: null, lon: null });
-  const defaultPositionRef = useRef({ lat: 60.1711, lon: 24.9414 });
   const [trashcans, setTrashcans] = useState([]);
-  const [isLocationEnabled, setLocationEnabled] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState(null);
+  const { userPosition, isLocationEnabled } = useLocation();
 
   const displayNotification = (text, status, timeout) => {
     setNotificationMessage({ text, status, timeout });
   };
 
+  //Gets all trashcan locations from the database
   const getAllTrashcans = async () => {
     try {
       const res = await TrashcanService.getAll();
@@ -26,28 +26,6 @@ function App() {
     } catch (err) {
       console.error("Error fetching trashcans", err);
       displayNotification("Tietokantaan ei saada yhteyttä", "error", 60000);
-    }
-  };
-
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserPosition({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
-          setLocationEnabled(true);
-        },
-        (error) => {
-          console.error("Error getting location:", error);
-          setUserPosition(defaultPositionRef.current);
-          setLocationEnabled(false);
-        }
-      );
-    } else {
-      setUserPosition(defaultPositionRef.current);
-      setLocationEnabled(false);
     }
   };
 
@@ -63,9 +41,6 @@ function App() {
       console.log(apiKeyFromEnv);
     }
     getAllTrashcans();
-
-    getLocation();
-
   }, []);
 
   return (
